@@ -1,0 +1,6 @@
+Mike (9/17):
+    - Installed react-router-dom and bootstrap dependencies.
+    - Created a root README.md file.
+    - Created a dev branch.
+    - Reorganized the react app using Routes.
+    - Created the Home, Navbar and Profile components.
