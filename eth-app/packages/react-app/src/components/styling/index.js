@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Header = styled.header`
   background-color: #282c34;
@@ -27,7 +28,7 @@ export const Image = styled.img`
   pointer-events: none;
 `;
 
-export const Link = styled.a.attrs({
+export const StdLink = styled.a.attrs({
   target: "_blank",
   rel: "noopener noreferrer",
 })`
@@ -51,4 +52,11 @@ export const Button = styled.button`
     border: none;
     outline: none;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  color: #CD5C5C;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 20px;
 `;

@@ -1,15 +1,21 @@
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Contract } from "@ethersproject/contracts";
-import { getDefaultProvider } from "@ethersproject/providers";
-import React, { useEffect, useState } from "react";
+//import { Contract } from "@ethersproject/contracts";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Body, Button, Header, Image, Link } from "./components";
-import logo from "./ethereumLogo.png";
-import useWeb3Modal from "./hooks/useWeb3Modal";
+//import { getDefaultProvider } from "@ethersproject/providers";
+//import React, { useEffect, useState } from "react";
 
-import { addresses, abis } from "@project/contracts";
+// For readOnChainData() function
+//import { addresses, abis } from "@project/contracts";
+
 import GET_TRANSFERS from "./graphql/subgraph";
 
+import Home from "./components/Home.js";
+import Navbar from "./components/Navbar.js";
+import Profile from "./components/Profile.js";
+
+/*
 async function readOnChainData() {
   // Should replace with the end-user wallet, e.g. Metamask
   const defaultProvider = getDefaultProvider();
@@ -20,59 +26,12 @@ async function readOnChainData() {
   const tokenBalance = await ceaErc20.balanceOf("0x3f8CB69d9c0ED01923F11c829BaE4D9a4CB6c82C");
   console.log({ tokenBalance: tokenBalance.toString() });
 }
-
-function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
-  const [account, setAccount] = useState("");
-  const [rendered, setRendered] = useState("");
-
-  useEffect(() => {
-    async function fetchAccount() {
-      try {
-        if (!provider) {
-          return;
-        }
-
-        // Load the user's accounts.
-        const accounts = await provider.listAccounts();
-        setAccount(accounts[0]);
-
-        // Resolve the ENS name for the first account.
-        const name = await provider.lookupAddress(accounts[0]);
-
-        // Render either the ENS name or the shortened account address.
-        if (name) {
-          setRendered(name);
-        } else {
-          setRendered(account.substring(0, 6) + "..." + account.substring(36));
-        }
-      } catch (err) {
-        setAccount("");
-        setRendered("");
-        console.error(err);
-      }
-    }
-    fetchAccount();
-  }, [account, provider, setAccount, setRendered]);
-
-  return (
-    <Button
-      onClick={() => {
-        if (!provider) {
-          loadWeb3Modal();
-        } else {
-          logoutOfWeb3Modal();
-        }
-      }}
-    >
-      {rendered === "" && "Connect Wallet"}
-      {rendered !== "" && rendered}
-    </Button>
-  );
-}
+*/
 
 function App() {
+
   const { loading, error, data } = useQuery(GET_TRANSFERS);
-  const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
+  //const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 
   React.useEffect(() => {
     if (!loading && !error && data && data.transfers) {
@@ -81,26 +40,19 @@ function App() {
   }, [loading, error, data]);
 
   return (
-    <div>
-      <Header>
-        <WalletButton provider={provider} loadWeb3Modal={loadWeb3Modal} logoutOfWeb3Modal={logoutOfWeb3Modal} />
-      </Header>
-      <Body>
-        <Image src={logo} alt="react-logo" />
-        <p>
-          Edit <code>packages/react-app/src/App.js</code> and save to reload.
-        </p>
-        {/* Remove the "hidden" prop and open the JavaScript console in the browser to see what this function does */}
-        <Button hidden onClick={() => readOnChainData()}>
-          Read On-Chain Balance
-        </Button>
-        <Link href="https://ethereum.org/developers/#getting-started" style={{ marginTop: "8px" }}>
-          Learn Ethereum
-        </Link>
-        <Link href="https://reactjs.org">Learn React</Link>
-        <Link href="https://thegraph.com/docs/quick-start">Learn The Graph</Link>
-      </Body>
-    </div>
+    <Router>
+      <div class="app">
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
