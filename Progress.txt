@@ -4,3 +4,11 @@ Mike (9/17):
     - Created a dev branch.
     - Reorganized the react app using Routes.
     - Created the Home, Navbar and Profile components.
+
+
+Harry (9/19):
+    - Installed React-icons dependencies.
+    - Created Mint component.
+    - Created contract for minting ERC721 NFTs
+    - Created root folder for api code
+

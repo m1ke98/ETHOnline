@@ -22,6 +22,18 @@ export const Body = styled.div`
   min-height: calc(100vh - 70px);
 `;
 
+export const Title = styled.div`
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+`;
+
+
+
 export const Image = styled.img`
   height: 40vmin;
   margin-bottom: 16px;

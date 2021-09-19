@@ -70,6 +70,7 @@ export default function Navbar() {
           <div class="w-50 d-flex mx-auto order-0 justify-content-center">
             <StyledLink to="/">Home</StyledLink>
             <StyledLink to="/profile">Profile</StyledLink>
+            <StyledLink to="/mint">Mint</StyledLink>
           </div>
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ms-auto">

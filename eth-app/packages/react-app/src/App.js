@@ -14,6 +14,7 @@ import GET_TRANSFERS from "./graphql/subgraph";
 import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
+import Mint from "./components/Mint.js";
 
 /*
 async function readOnChainData() {
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/mint">
+            <Mint />
           </Route>
         </Switch>
       </div>
