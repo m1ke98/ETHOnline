@@ -34,6 +34,7 @@ export const MintBody = styled.div`
 `;
 
 export const Body = styled.div`
+  align-items:center;
   background-color: #282c34;
   color: white;
   display: flex;
