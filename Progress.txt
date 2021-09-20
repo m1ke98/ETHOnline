@@ -12,3 +12,6 @@ Harry (9/19):
     - Created contract for minting ERC721 NFTs
     - Created root folder for api code
 
+Mike (9/19):
+    - Installed Hardhat framework for smart contract development.
+    - Cloned the Opensea sample API into the repo.
