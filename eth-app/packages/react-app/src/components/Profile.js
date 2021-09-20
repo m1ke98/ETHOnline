@@ -1,13 +1,13 @@
-import React from "react";
-import { Body } from "./styling";
+import React, { useEffect, useState } from "react";
+import { Body, Title } from "./styling";
+
 
 export default function Profile() {
+
     return (
         <div>
+            <Title>Profile</Title>
             <Body>
-                <p>
-                    Profile
-                </p>
             </Body>
         </div>
     )

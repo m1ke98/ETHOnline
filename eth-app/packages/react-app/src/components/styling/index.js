@@ -11,8 +11,29 @@ export const Header = styled.header`
   color: white;
 `;
 
-export const Body = styled.div`
+export const PageHeader = styled.span`
   align-items: center;
+  background-color: #282c34;
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+`;
+
+export const MintBody = styled.div`
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+`;
+
+export const Body = styled.div`
   background-color: #282c34;
   color: white;
   display: flex;
@@ -28,10 +49,20 @@ export const Title = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 4vmin);
   justify-content: center;
 `;
 
+export const TitleIcon = styled.div`
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.3rem;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+`;
 
 
 export const Image = styled.img`

@@ -10,7 +10,9 @@ Harry (9/19):
     - Installed React-icons dependencies.
     - Created Mint component.
     - Created contract for minting ERC721 NFTs
-    - Created root folder for api code
+    - Added the useLocalStorage hook because React is hard...
+        > Store session info from functions in one component and access it from another 
+    - Added UI functionality Form to Mint Component 
 
 Mike (9/19):
     - Installed Hardhat framework for smart contract development.
