@@ -23,7 +23,7 @@ export const PageHeader = styled.span`
 `;
 
 export const MintBody = styled.div`
-  align-items: center;
+  align-items: stretch;
   background-color: #282c34;
   color: white;
   display: flex;
