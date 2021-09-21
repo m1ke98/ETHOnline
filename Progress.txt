@@ -17,3 +17,9 @@ Harry (9/19):
 Mike (9/19):
     - Installed Hardhat framework for smart contract development.
     - Cloned the Opensea sample API into the repo.
+
+Harry (9/20):
+    - Styled Card and applied to Mint Componenet
+    - Create Constants.js and added my API KEY for nft.
+    - Added model/Models.js add put some examples of objects we can create when the app starts up that will allow us to pass
+        data around and back and forth from api/api's.
