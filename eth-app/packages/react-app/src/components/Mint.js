@@ -2,7 +2,22 @@ import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton, CardInput } from "./styling/Card";
 
+import { Body } from "./styling";
+import useWeb3Modal from "../hooks/useWeb3Modal";
+
+
 export default function Mint() {
+    const [provider] = useWeb3Modal();
+
+    if (!provider) {
+        return (
+            <div>
+                <Body>
+                    Please login.
+                </Body>
+            </div>
+        )
+    }
 
     return (
         <div>
