@@ -1,12 +1,12 @@
 import { useState } from "react";
-// Hook from useHooks! (https://usehooks.com/useLocalStorage/)
-export default function useLocalStorage(key, initialValue, ttl) {
+// Hook from useHooks! (https://usehooks.com/useLocalStorage/) //Modified to use session storage
+export default function useSessionStorage(key, initialValue, ttl) {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState(() => {
     try {
       // Get from local storage by key
-      const item = window.localStorage.getItem(key);
+      const item = window.sessionStorage.getItem(key);
       const parsedItem = item ? JSON.parse(item) : initialValue;
 
       if (typeof parsedItem === "object" && parsedItem !== null && "expiry" in parsedItem && "value" in parsedItem) {
@@ -14,7 +14,7 @@ export default function useLocalStorage(key, initialValue, ttl) {
         if (ttl && now.getTime() > parsedItem.expiry) {
           // If the item is expired, delete the item from storage
           // and return null
-          window.localStorage.removeItem(key);
+          window.sessionStorage.removeItem(key);
           return initialValue;
         }
         return parsedItem.value;
@@ -29,14 +29,14 @@ export default function useLocalStorage(key, initialValue, ttl) {
   });
 
   // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
+  // ... persists the new value to sessionStorage.
   const setValue = value => {
     try {
       // Allow value to be a function so we have same API as useState
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       // Save state
       setStoredValue(valueToStore);
-      // Save to local storage
+      // Save to session storage
       if (ttl) {
         const now = new Date();
 
@@ -46,9 +46,9 @@ export default function useLocalStorage(key, initialValue, ttl) {
           value: valueToStore,
           expiry: now.getTime() + ttl,
         };
-        window.localStorage.setItem(key, JSON.stringify(item));
+        window.sessionStorage.setItem(key, JSON.stringify(item));
       } else {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
       // A more advanced implementation would handle the error case

@@ -1,9 +1,9 @@
-import React from "react";
 import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
-import { CardWrapper, CardBody, CardButton,CardInput } from "./styling/Card";
+import { CardWrapper, CardBody, CardButton, CardInput } from "./styling/Card";
 
 export default function Mint() {
+
     return (
         <div>
             <PageHeader>

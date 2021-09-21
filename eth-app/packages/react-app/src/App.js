@@ -1,7 +1,10 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
+// import { useQuery } from "@apollo/react-hooks";
 //import { Contract } from "@ethersproject/contracts";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import useSessionStorage from "./hooks/useSessionStorage";
+// import useWeb3Modal from "./hooks/useWeb3Modal";
+
 
 //import { getDefaultProvider } from "@ethersproject/providers";
 //import React, { useEffect, useState } from "react";
@@ -9,7 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // For readOnChainData() function
 //import { addresses, abis } from "@project/contracts";
 
-import GET_TRANSFERS from "./graphql/subgraph";
+// import GET_TRANSFERS from "./graphql/subgraph";
 
 import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
@@ -31,19 +34,20 @@ async function readOnChainData() {
 
 function App() {
 
-  const { loading, error, data } = useQuery(GET_TRANSFERS);
-  //const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
+  // const { loading, error, data } = useQuery(GET_TRANSFERS); // For use with GraphQL
+  // const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
+  // For GraphQl
+  // React.useEffect(() => {
+  //   if (!loading && !error && data && data.transfers) {
+  //     console.log({ transfers: data.transfers });
+  //   }
+  // }, [loading, error, data]);
 
-  React.useEffect(() => {
-    if (!loading && !error && data && data.transfers) {
-      console.log({ transfers: data.transfers });
-    }
-  }, [loading, error, data]);
 
   return (
     <Router>
       <div class="app">
-        <Navbar />
+        <Navbar/>
         <Switch>
           <Route exact path="/">
             <Home />
