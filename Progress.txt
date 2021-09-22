@@ -23,3 +23,6 @@ Harry (9/20):
     - Create Constants.js and added my API KEY for nft.
     - Added model/Models.js add put some examples of objects we can create when the app starts up that will allow us to pass
         data around and back and forth from api/api's.
+
+Mike (9/21): 
+    - Created PoeNft.sol contract and some test with it
