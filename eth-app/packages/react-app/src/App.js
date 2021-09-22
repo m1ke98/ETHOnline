@@ -46,7 +46,7 @@ function App() {
 
   return (
     <Router>
-      <div class="app">
+      <div className="App">
         <Navbar/>
         <Switch>
           <Route exact path="/">
