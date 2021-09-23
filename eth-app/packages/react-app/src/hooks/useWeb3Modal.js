@@ -6,7 +6,7 @@ import {INFURA_API_KEY} from "../constants"
 
 // Enter a valid infura key here to avoid being rate limited
 // You can get a key for free at https://infura.io/register
-const INFURA_ID = INFURA_API_KEY;
+const INFURA_ID = "INFURA_API_KEY";
 
 const NETWORK = "mainnet";
 
