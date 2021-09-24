@@ -20,6 +20,7 @@ import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
+import { Modal } from "web3modal";
 
 /*
 async function readOnChainData() {
@@ -64,6 +65,7 @@ function App() {
         setAccount("");
         setRendered("");
         console.error(err);
+        return;
       }
     }
     fetchAccount();
@@ -81,7 +83,12 @@ function App() {
     if (!provider) {
       loadWeb3Modal();
     } else {
-      logoutOfWeb3Modal();
+      let response = window.confirm("Are you sure you want to sign out?");
+      if (response) {
+        logoutOfWeb3Modal();
+      } else {
+        return;
+      }
     }
   }
 
