@@ -2,10 +2,11 @@ import { Web3Provider } from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Web3Modal from "web3modal";
+import {INFURA_API_KEY} from "../constants"
 
 // Enter a valid infura key here to avoid being rate limited
 // You can get a key for free at https://infura.io/register
-const INFURA_ID = "INVALID_INFURA_KEY";
+const INFURA_ID = "INFURA_API_KEY";
 
 const NETWORK = "mainnet";
 
