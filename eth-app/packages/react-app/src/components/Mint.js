@@ -1,6 +1,7 @@
-import { MintBody, Title, TitleIcon, PageHeader, StyledInput, StyledInputTextArea } from "./styling";
+import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
-import { CardWrapper, CardBody, CardButton } from "./styling/Card";
+import { CardWrapper, CardBody, CardButton, CardInput } from "./styling/Card";
+
 import { Body } from "./styling";
 import useWeb3Modal from "../hooks/useWeb3Modal";
 
@@ -8,7 +9,16 @@ import useWeb3Modal from "../hooks/useWeb3Modal";
 export default function Mint() {
     const [provider, loadWeb3Modal] = useWeb3Modal();
 
-    if (provider) {
+    if (!provider) {
+        loadWeb3Modal();
+        return (
+            <div>
+                <Body>
+                    Please login.
+                </Body>
+            </div>
+        )
+    } else {
         return (
             <div>
                 <PageHeader>
@@ -22,17 +32,17 @@ export default function Mint() {
                                     <div className="row text-center">
                                         <span>
                                             <label htmlFor="Title" style={{ padding: 1 + 'rem' }}>Title: </label>
-                                            <StyledInput type="text" id="Title" placeholder="Title Here" required></StyledInput>
+                                            <CardInput type="text" id="Title" placeholder="Title Here" required></CardInput>
                                         </span>
                                     </div>
                                     <div className="row text-center">
                                         <label htmlFor="Description" style={{ padding: 1 + 'rem' }}>Description: </label>
-                                        <StyledInputTextArea name="nftDescription" rows="5" cols="50" id="Description" placeholder="Describe your NFT here" required></StyledInputTextArea>
+                                        <textarea name="nftDescription" rows="5" cols="50" id="Description" placeholder="Describe your NFT here" required></textarea>
                                     </div>
                                     <div class="row text-center">
                                         <span>
-                                            <StyledInput type="file" accept="audio/*, video/*, image/*, .html, .pdf" id="upload-media" required>
-                                            </StyledInput>
+                                            <input type="file" accept="audio/*, video/*, image/*, .html, .pdf" id="upload-media" required>
+                                            </input>
                                             <label htmlFor="upload-media" style={{ padding: 0.1 + 'rem' }}>(Supports JPG, PNG and MP4 videos.Max file size: 10MB.)</label>
                                         </span>
                                     </div>
@@ -40,23 +50,12 @@ export default function Mint() {
                                     </div>
                                 </CardBody>
                             </form>
+
                         </CardWrapper>
+
                     </MintBody>
                 </div>
-            </div>
+            </div >
         )
     }
-
-    loadWeb3Modal().then((result) => {
-        if (result) {
-
-        }
-    }).catch((err) => {
-        console.log(err)
-    });
-    return (<div>
-        <Body>
-            Please connect to continue...
-        </Body>
-    </div>);
 }

@@ -20,6 +20,7 @@ import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
+import { Modal } from "web3modal";
 
 /*
 async function readOnChainData() {
@@ -78,7 +79,7 @@ function App() {
   //   }
   // }, [loading, error, data]);
 
-  function web3Modal() {
+  function wallentButtonClicked() {
     if (!provider) {
       loadWeb3Modal();
     } else {
@@ -94,7 +95,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar web3Modal={web3Modal} rendered={rendered}></Navbar>
+        <Navbar handleWalletConnect={wallentButtonClicked} rendered={!rendered ? "Connect Wallet" : rendered + ""}></Navbar>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -103,7 +104,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/mint">
-            <Mint/>
+            <Mint />
           </Route>
         </Switch>
       </div>
