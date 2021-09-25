@@ -2,12 +2,11 @@ import { MintBody, Title, TitleIcon, PageHeader, StyledInput, StyledInputTextAre
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
-import useWeb3Modal from "../hooks/useWeb3Modal";
 
 
-export default function Mint() {
-    const [provider, loadWeb3Modal] = useWeb3Modal();
-
+export default function Mint(
+    { provider, web3Modal }
+) {
     if (provider) {
         return (
             <div>
@@ -47,13 +46,8 @@ export default function Mint() {
         )
     }
 
-    loadWeb3Modal().then((result) => {
-        if (result) {
+    web3Modal();
 
-        }
-    }).catch((err) => {
-        console.log(err)
-    });
     return (<div>
         <Body>
             Please connect to continue...

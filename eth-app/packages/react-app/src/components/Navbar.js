@@ -6,16 +6,6 @@ export default function Navbar({
   rendered
 }) {
 
-  const [btnContent, setBtnContent] = useState("Connect Wallet");
-
-  useEffect(() => {
-    if (rendered && rendered !== "") {
-      setBtnContent(rendered);
-    } else {
-      setBtnContent("Connect Wallet");
-    }
-  }, [rendered]);
-
 
   return (
     <nav className="navbar navbar-expand-md">
@@ -36,7 +26,7 @@ export default function Navbar({
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <div className="button">
-                <Button onClick={web3Modal}>{btnContent}</Button>
+                <Button onClick={web3Modal}>{(rendered && rendered !== "") ? rendered : "Connect Wallet"}</Button>
               </div>
             </li>
           </ul>

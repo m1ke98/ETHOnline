@@ -40,6 +40,8 @@ function App() {
   const [rendered, setRendered] = useState("");
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 
+
+
   useEffect(() => {
     async function fetchAccount() {
       try {
@@ -68,8 +70,9 @@ function App() {
       }
     }
     fetchAccount();
+  }, [provider, account, setAccount, setRendered]);
 
-  }, [account, provider, setAccount, setRendered]);
+
   // const { loading, error, data } = useQuery(GET_TRANSFERS); // For use with GraphQL
   // For GraphQl
   // React.useEffect(() => {
@@ -103,7 +106,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/mint">
-            <Mint/>
+            <Mint web3Modal={web3Modal} provider={provider} />
           </Route>
         </Switch>
       </div>

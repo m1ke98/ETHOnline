@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {Input ,Upload} from 'antd';
+
 
 export const Header = styled.header`
   background-color: #282c34;
@@ -11,6 +13,7 @@ export const Header = styled.header`
   color: white;
 `;
 
+
 export const PageHeader = styled.span`
   align-items: center;
   background-color: #282c34;
@@ -21,6 +24,12 @@ export const PageHeader = styled.span`
   justify-content: center;
   color: white;
 `;
+
+export const StyledInput = styled(Input)``;
+export const StyledInputTextArea = styled(Input.TextArea)``;
+export const StyledUpload = styled(Upload)``;
+
+
 
 export const MintBody = styled.div`
   align-items: stretch;
