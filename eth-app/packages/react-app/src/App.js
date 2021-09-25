@@ -83,11 +83,12 @@ function App() {
 
   function web3Modal() {
     if (!provider) {
-      loadWeb3Modal();
+      /* catch prevents errors when user closes wallet modal*/
+      loadWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
     } else {
       let response = window.confirm("Are you sure you want to sign out?");
       if (response) {
-        logoutOfWeb3Modal();
+        logoutOfWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
       } else {
         return;
       }
