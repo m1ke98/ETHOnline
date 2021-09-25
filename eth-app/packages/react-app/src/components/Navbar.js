@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { StyledLink, Button } from "./styling";
 
+export default function Navbar({
+  web3Modal,
+  rendered
+}) {
 
-export default function Navbar(props) {
-
-  const [rendered, setRendered] = useState("Connect Wallet");
+  const [btnContent, setBtnContent] = useState("Connect Wallet");
 
   useEffect(() => {
-    setRendered(props.rendered);
-  }, [props.rendered]);
+    if (rendered && rendered !== "") {
+      setBtnContent(rendered);
+    } else {
+      setBtnContent("Connect Wallet");
+    }
+  }, [rendered]);
 
 
   return (
@@ -30,7 +36,7 @@ export default function Navbar(props) {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <div className="button">
-                <Button onClick={props.handleWalletConnect}>{rendered}</Button>
+                <Button onClick={web3Modal}>{btnContent}</Button>
               </div>
             </li>
           </ul>
