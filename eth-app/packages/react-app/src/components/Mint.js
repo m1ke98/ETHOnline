@@ -1,6 +1,7 @@
 import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
+
 import { Body } from "./styling";
 
 
@@ -40,10 +41,12 @@ export default function Mint({
                                     </div>
                                 </CardBody>
                             </form>
+
                         </CardWrapper>
+
                     </MintBody>
                 </div>
-            </div>
+            </div >
         )
     }
 

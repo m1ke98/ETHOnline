@@ -20,7 +20,6 @@ import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
-
 /*
 async function readOnChainData() {
   // Should replace with the end-user wallet, e.g. Metamask

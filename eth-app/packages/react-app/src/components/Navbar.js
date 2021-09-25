@@ -1,11 +1,12 @@
 import React from "react";
 import { StyledLink, Button } from "./styling";
 
+
 export default function Navbar({
   web3Modal,
   rendered
 }) {
-
+  
   return (
     <nav className="navbar navbar-expand-md">
       <div className="container-fluid">
