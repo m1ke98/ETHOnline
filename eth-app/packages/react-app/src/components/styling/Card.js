@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components";
-import Card from 'antd/lib/card';
 
-export const CardWrapper = styled(Card)`
+export const CardWrapper = styled.div`
   overflow: hidden;
   padding: 0 0 32px;
   margin-top: 5px;
   height:fit-content;
-  width: 70vw;
+  width: 60vw
   font-family: inherit;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
   background-color: #CD5C5C;
+;
 `;
 
 export const CardHeader = styled.header`
@@ -76,22 +76,22 @@ export const CardIcon = styled.span`
   }
 
   ${props =>
-    props.big &&
-    css`
+        props.big &&
+        css`
       font-size: 26px;
     `}
 
   ${props =>
-    props.eye &&
-    css`
+        props.eye &&
+        css`
       position: absolute;
       top: 8px;
       right: 0;
     `}
 
   ${props =>
-    props.small &&
-    css`
+        props.small &&
+        css`
       font-size: 14px;
     `}
 `;
