@@ -40,8 +40,6 @@ function App() {
   const [rendered, setRendered] = useState("");
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
 
-
-
   useEffect(() => {
     async function fetchAccount() {
       try {
