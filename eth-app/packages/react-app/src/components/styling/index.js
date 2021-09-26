@@ -11,6 +11,7 @@ export const Header = styled.header`
   color: white;
 `;
 
+
 export const PageHeader = styled.span`
   align-items: center;
   background-color: #282c34;
@@ -21,6 +22,8 @@ export const PageHeader = styled.span`
   justify-content: center;
   color: white;
 `;
+
+
 
 export const MintBody = styled.div`
   align-items: stretch;
