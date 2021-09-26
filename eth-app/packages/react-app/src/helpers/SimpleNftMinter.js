@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { NFTStorage } from 'nft.storage';
 import { useContractLoader } from "../hooks";
 import Account from "./Account";
-import { Transactor } from ".";
+import { Transactor } from "./Transactor";
 import { NFT_STORAGE_API_KEY, DEFAULT_CONTRACT_NAME } from "constants";
-import { StyledUpload, StyledInput, StyledInputTextArea, Button } from '../styling';
-import { CardWrapper } from '../styling/Card';
+import { CardWrapper } from '../components/styling/Card';
+import { Button } from '../components/styling';
 
 async function NftMinter({ contract, ownerAddress, provider, gasPrice, setStatus, image, name, description }) {
 
@@ -84,7 +84,7 @@ export default function Minter({
 
   const uploadButton = (
     <div>
-      <PlusOutlined />
+      <Button />
       <div style={{ marginTop: 8 }}>
         Choose image
       </div>
@@ -94,7 +94,7 @@ export default function Minter({
   const uploadView = (
     <div>
       Drop an image file or click below to select.
-      <StyledUpload
+      <input
         name="avatar"
         accept=".jpeg,.jpg,.png,.gif"
         listType="picture-card"
@@ -104,20 +104,20 @@ export default function Minter({
         beforeUpload={beforeUpload}
       >
         {uploadButton}
-      </StyledUpload>
+      </input>
     </div>
   );
 
   const preview = previewURL ? <img src={previewURL} style={{ maxWidth: "800px" }} /> : <div />
 
   const nameField = (
-    <StyledInput placeholder="Enter a name for your NFT" onChange={e => {
+    <input placeholder="Enter a name for your NFT" onChange={e => {
       setName(e.target.value);
     }} />
   );
 
   const descriptionField = (
-    <StyledInputTextArea placeholder="Enter a description" onChange={e => {
+    <textarea placeholder="Enter a description" onChange={e => {
       setDescription(e.target.value);
     }} />
   );
