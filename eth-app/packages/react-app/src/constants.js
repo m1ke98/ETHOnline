@@ -4,7 +4,7 @@ export const NFT_STORAGE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWI
 export const INFURA_API_KEY = "b58725ea45f647beac39eee4a2b379f0"; //Harry's infura api key
 export const ETHERSCAN_KEY = "4T2IYQ6IJG86YK31QZMQEC2W88RPSM7Z5Y";// Harry's etherscan key
 export const ALCHEMY_KEY = "lLk1Rpr7uwV5uFHYspWGReUfF8yEMMTS";
-
+export const NFT721_CONTRACT_ADDRESS = "Deployed address";
 
 export const NETWORKS = {
     localhost: {
