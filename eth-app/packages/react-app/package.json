@@ -34,6 +34,7 @@
     "eslint-plugin-flowtype": "^5.7.2",
     "graphql": "^15.5.0",
     "ipfs-http-client": "^50.1.2",
+    "nft.storage": "^3.2.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
