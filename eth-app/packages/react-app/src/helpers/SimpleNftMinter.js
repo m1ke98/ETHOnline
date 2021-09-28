@@ -1,4 +1,3 @@
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import React, { useState } from "react";
 import { NFTStorage } from 'nft.storage';
 import { useContractLoader } from "../hooks";
@@ -22,7 +21,7 @@ async function NftMinter({ contract, ownerAddress, provider, gasPrice, setStatus
 
   // the returned metadata.url has the IPFS URI we want to add.
   // our smart contract already prefixes URIs with "ipfs://", so we remove it before calling the `mintToken` function
-  const metadataURI = metadata.url.replace(/^ipfs:\/\//, "");
+  const metadataURI = metadata.url;
 
   // scaffold-eth's Transactor helper gives us a nice UI popup when a transaction is sent
   const transactor = Transactor(provider, gasPrice);
@@ -147,7 +146,7 @@ export default function Minter({
 
   const mintButton = (
     <Button type="primary" disabled={!mintEnabled} onClick={startMinting}>
-      {minting ? <LoadingOutlined /> : "Mint!"}
+      {minting ? <button /> : "Mint!"}
     </Button>
   )
 
