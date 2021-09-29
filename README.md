@@ -1,4 +1,4 @@
-# ETHOnline
+# POE - Proof of Experience 
 
 ## Installation Guide
 Install the repository:
