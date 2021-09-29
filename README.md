@@ -1,5 +1,15 @@
-# ETHOnline
-
+<p align="center">
+  <a href="https://github.com/m1ke98/ETHOnline">
+    <img src="https://raw.githubusercontent.com/m1ke98/ETHOnline/dev/eth-app/packages/react-app/public/img/image1.png" alt="Logo" width="200" height="200">
+  </a>
+  <h3 align="center">Proof of Experience
+</h3>
+  <p align="center">
+  Blockchain based tokenization platform for minting provable credentials, diplomas, and digital badges
+  <br/>
+  </p>
+  
+  
 ## Installation Guide
 Install the repository:
 ```
