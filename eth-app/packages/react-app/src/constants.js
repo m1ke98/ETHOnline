@@ -17,7 +17,7 @@ export const NETWORKS = {
         name: "ropsten",
         color: "#F60D09",
         chainId: 3,
-        rpcUrl: `"https://eth-ropsten.alchemyapi.io/v2/"${ALCHEMY_KEY}`,
+        rpcUrl: `https://eth-ropsten.alchemyapi.io/v2/${ALCHEMY_KEY}`,
     },
 
     // mainnet: {

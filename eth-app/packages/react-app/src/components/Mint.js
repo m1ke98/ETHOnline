@@ -3,6 +3,7 @@ import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
+import { mint } from "../helpers/NftUtil"
 
 
 export default function Mint({
@@ -17,6 +18,7 @@ export default function Mint({
     const [minting, setMinting] = useState(false);
     const [status, setStatus] = useState("");
     const [tokenId, setTokenId] = useState(null);
+
     if (provider) {
         return (
             <div>
@@ -26,7 +28,9 @@ export default function Mint({
                 <div className="container-fluid w-100 p-0 m-0">
                     <MintBody style={{ top: 0 }}>
                         <CardWrapper>
-                            <form className="form">
+                            <form className="form" onSubmit={() => {
+
+                            }}>
                                 <CardBody className="card-body">
                                     <div className="row text-center">
                                         <span>
