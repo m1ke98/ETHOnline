@@ -1,19 +1,20 @@
 import { NFTStorage } from 'nft.storage';
-import { NFT_STORAGE_API_KEY, NFT721_CONTRACT_ADDRESS, ALCHEMY_KEY } from "constants";
-const contractABI = require("../contract-abi.json");
+import { NFT_STORAGE_API_KEY, NETWORKS } from "../constants";
+const contractABI = require("../contracts/NFT721.json");
+const tokenAddressFile = require("../contracts/nft721-token-address.json");
+const contractAddress = tokenAddressFile.NFT721_Token;
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const web3 = createAlchemyWeb3(ALCHEMY_KEY);
-
+const web3 = createAlchemyWeb3(NETWORKS.ropsten.rpcUrl);
 
 
 export async function mint({ name, description, image }) {
 
   const tokenURI = await storeNftData(name, description, image);
 
-  window.contract = await new web3.eth.Contract(contractABI, NFT721_CONTRACT_ADDRESS);
+  window.contract = await new web3.eth.Contract(contractABI, contractAddress);
 
   const transactionParameters = {
-    to: NFT721_CONTRACT_ADDRESS, // Required except during contract publications.
+    to: contractAddress, // Required except during contract publications.
     from: window.ethereum.selectedAddress, // must match user's active address.
     data: window.contract.methods
       .mintNFT(window.ethereum.selectedAddress, tokenURI)
