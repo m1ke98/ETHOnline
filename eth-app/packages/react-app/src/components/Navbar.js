@@ -21,6 +21,7 @@ export default function Navbar({
           <StyledLink to="/">Home</StyledLink>
           <StyledLink to="/profile">Profile</StyledLink>
           <StyledLink to="/mint">Mint</StyledLink>
+          <StyledLink to="/test">Test</StyledLink> 
         </div>
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ms-auto">
