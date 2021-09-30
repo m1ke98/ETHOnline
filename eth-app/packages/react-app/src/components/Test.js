@@ -6,12 +6,12 @@ const Test = (props) => {
 
     //const web3Modal = props.web3Modal;
     const account = props.account;
-    //const provider = props.provider;
+    const provider = props.provider;
     const [status, setStatus] = useState("");
     const [successful, setSuccess] = useState("");
 
     const onMintPressed = async () => {
-        const { success, status } = await mintToken(account);
+        const { success, status } = await mintToken(account, provider);
         setStatus(status);
         if (success) {
             setSuccess("Success!");

@@ -1,35 +1,25 @@
-import { getDefaultProvider } from "@ethersproject/providers";
 import { Contract } from "@ethersproject/contracts";
 import { addresses, abis } from "@project/contracts";
 
-export const mintToken = async(account) => {
+export const mintToken = async(account, provider) => {
 
     const tokenURI = "https://gateway.pinata.cloud/ipfs/QmPRACzUUf4dZjDjMk8a7QhNuDXb952uHB5ruNieWURND9";
 
-    const defaultProvider = getDefaultProvider();
-    const poeNFT = new Contract(addresses.poeNft, abis.poeNft, defaultProvider);
-
-
-    const transactionParameters = {
-        to: addresses.poeNft,
-        from: account,
-        'data': poeNFT.methods.mintToken(account, tokenURI).encodeABI()
-    };
+    const signer = provider.getSigner();
+    const poeNFT = new Contract(addresses.poeNft, abis.poeNft, signer);
 
     try {
-        const txHash = await defaultProvider
-            .call({
-                method: 'eth_sendTransaction',
-                params: [transactionParameters],
-            });
+        const txHash = await poeNFT.mintToken(account, tokenURI);
+
+        await txHash.wait();
         return {
             success: true,
-            status: "Success!" + txHash
+            status: txHash
         }
     } catch (error) {
         return {
             success: false,
-            status: "Something went wrong: " + error.message
+            status: error.message
         }
     }
 }
