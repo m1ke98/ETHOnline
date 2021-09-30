@@ -1,41 +1,43 @@
+import { useState } from "react";
 import { Body, Title, Button } from "./styling";
-import { Contract } from "@ethersproject/contracts";
+import { mintToken } from "./helpers/interact.js";
 
-import { addresses, abis } from "@project/contracts";
+const Test = (props) => {
 
-const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
+    //const web3Modal = props.web3Modal;
+    const account = props.account;
+    //const provider = props.provider;
+    const [status, setStatus] = useState("");
+    const [successful, setSuccess] = useState("");
 
-export default function Test({ account, provider }) {
-
-    async function _mintToken() {
-        const poeNft = new Contract(
-            addresses.poeNft,
-            abis.PoeNft,
-            account
-        );
-
-        try {
-            const tx = await poeNft.mintToken(account, "https://your-metadata-api.herokuapp.com/api/token/");
-
-            const receipt = await tx.wait();
-
-            if (receipt.status === 0) {
-                throw new Error("Transaction failed");
-            }
-        } catch (error) {
-            if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-                return;
-            }
-            console.error(error);
+    const onMintPressed = async () => {
+        const { success, status } = await mintToken(account);
+        setStatus(status);
+        if (success) {
+            setSuccess("Success!");
+        } else {
+            setSuccess("Failed");
         }
-    }
+    };
 
     return (
         <div>
             <Title>Test</Title>
             <Body>
-                <Button onClick={_mintToken}>Mint</Button>
+                <Button onClick={onMintPressed}>Mint</Button>
+                <br/>
+                <p id="account">
+                    currentAccount: {account}
+                </p>
+                <p id="status">
+                    {status}
+                </p>
+                <p id="successful">
+                    {successful}
+                </p>
             </Body>
         </div>
-    )
-}
+    );
+};
+
+export default Test;
