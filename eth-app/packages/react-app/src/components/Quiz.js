@@ -1,43 +1,24 @@
-import { useState } from "react";
-import { Body, Title, Button } from "./styling";
-import { mintToken } from "./helpers/interact.js";
+import React from "react";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
-const Test = (props) => {
 
-    //const web3Modal = props.web3Modal;
-    const account = props.account;
-    const provider = props.provider;
-    const [status, setStatus] = useState("");
-    const [successful, setSuccess] = useState("");
-
-    const onMintPressed = async () => {
-        const { success, status } = await mintToken(account, provider);
-        setStatus(status);
-        if (success) {
-            setSuccess("Success!");
-        } else {
-            setSuccess("Failed");
-        }
-    };
-
+export default function Quiz() {
     return (
-        <div>
-            <Title>Test</Title>
-            <Body>
-                <Button onClick={onMintPressed}>Mint</Button>
-                <br/>
-                <p id="account">
-                    currentAccount: {account}
-                </p>
-                <p id="status">
-                    {status}
-                </p>
-                <p id="successful">
-                    {successful}
-                </p>
-            </Body>
-        </div>
+        <FormControl component="fieldset">
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup
+            aria-label="gender"
+            defaultValue="female"
+            name="radio-buttons-group"
+            >
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+        </FormControl>
     );
-};
-
-export default Test;
+}
