@@ -3,7 +3,6 @@ import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
-import { mint } from "../helpers/NftUtil"
 
 
 export default function Mint({
