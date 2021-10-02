@@ -20,7 +20,9 @@ import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
-import Test from "./components/Test";
+import Test from "./components/Test.js";
+import Quiz from "./components/Quiz.js";
+
 /*
 async function readOnChainData() {
   // Should replace with the end-user wallet, e.g. Metamask
@@ -109,6 +111,9 @@ function App() {
           </Route>
           <Route path="/test">
             <Test account={account} provider={provider} />
+          </Route>
+          <Route path="/quiz">
+            <Quiz account={account} />
           </Route>
         </Switch>
       </div>
