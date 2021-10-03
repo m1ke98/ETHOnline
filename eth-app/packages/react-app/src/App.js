@@ -35,6 +35,7 @@ async function readOnChainData() {
 */
 
 function App() {
+  require('dotenv').config();
 
   const [account, setAccount] = useState("");
   const [rendered, setRendered] = useState("");
