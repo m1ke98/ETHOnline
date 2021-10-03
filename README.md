@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/m1ke98/ETHOnline">
-    <img src="https://raw.githubusercontent.com/m1ke98/ETHOnline/main/eth-app/packages/react-app/public/img/New%20Poe.png" alt="Logo" width="200" height="200">
+    <img src="https://raw.githubusercontent.com/m1ke98/ETHOnline/main/eth-app/packages/react-app/public/Not%20Transparent%20Background.png" alt="Logo" width="200" height="200">
   </a>
   <h3 align="center">Proof of Experience
 </h3>
