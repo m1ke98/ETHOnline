@@ -1,19 +1,19 @@
 import React from "react";
 import { StyledLink, Button } from "./styling";
-
+import logo from "../assets/New Poe 6.png";
 
 export default function Navbar({
   web3Modal,
   rendered
 }) {
-  
+
   return (
     <nav className="navbar navbar-expand-md">
       <div className="container-fluid">
         <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
           <ul className="navbar-nav me-auto">
             <li className="nav-item active">
-              <h2 className="dapp-title">SomethingCool</h2>
+              <h2 className="dapp-title"><img src={logo} alt="nav-logo" height="90" width="auto" /></h2>
             </li>
           </ul>
         </div>
@@ -22,7 +22,10 @@ export default function Navbar({
           <StyledLink to="/profile">Profile</StyledLink>
           <StyledLink to="/mint">Mint</StyledLink>
           <StyledLink to="/test">Test</StyledLink>
+<<<<<<< HEAD
           <StyledLink to="/quiz">Quiz</StyledLink>
+=======
+>>>>>>> origin/main
         </div>
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ms-auto">

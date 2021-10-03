@@ -107,7 +107,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/mint">
-            <Mint web3Modal={web3Modal} provider={provider} />
+            <Mint web3Modal={web3Modal} provider={provider} account={account}/>
           </Route>
           <Route path="/test">
             <Test account={account} provider={provider} />

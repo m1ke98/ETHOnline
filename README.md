@@ -1,14 +1,22 @@
 <p align="center">
   <a href="https://github.com/m1ke98/ETHOnline">
-    <img src="https://raw.githubusercontent.com/m1ke98/ETHOnline/dev/eth-app/packages/react-app/public/img/image1.png" alt="Logo" width="200" height="200">
+    <img src="https://raw.githubusercontent.com/m1ke98/ETHOnline/main/eth-app/packages/react-app/public/Not%20Transparent%20Background.png" alt="Logo" width="200" height="200">
   </a>
   <h3 align="center">Proof of Experience
 </h3>
   <p align="center">
-  Blockchain based tokenization platform for minting provable credentials, diplomas, and digital badges
+ Tokenized learning backed by the power of the Ethereum Blockchain. 
   <br/>
   </p>
   
+  
+## About
+What is PoE?
+
+PoE or _Proof of Experience_, allows for authentication and verification of real world experience.
+PoE mints non-transferable NFT's and binds them to digital or physical credential certificates. 
+These certificates can be awared to an end user to be presented as immutable proof of a completed experience. 
+
   
 ## Installation Guide
 Install the repository:
