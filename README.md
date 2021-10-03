@@ -5,10 +5,18 @@
   <h3 align="center">Proof of Experience
 </h3>
   <p align="center">
-  Blockchain based tokenization platform for minting provable credentials, diplomas, and digital badges
+ Tokenized learning backed by the power of the Ethereum Blockchain. 
   <br/>
   </p>
   
+  
+## About
+What is POE?
+
+POE or _Proof of Experience_, allows for authentication and verification of real world experience.
+POE mints non-transferable NFT's and binds them to digital or physical credential certificates. 
+These certificates can be awared to an end user to be presented as immutable proof of a completed experience. 
+
   
 ## Installation Guide
 Install the repository:
