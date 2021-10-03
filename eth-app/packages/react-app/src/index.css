@@ -14,3 +14,13 @@ body {
 .dapp-title {
   color: white;
 }
+
+.quizQuestion {
+  justify-content: center;
+  align-items: center;
+}
+
+.quizAnswers {
+  justify-content: center;
+  align-items: center;
+}

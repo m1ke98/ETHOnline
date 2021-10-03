@@ -22,10 +22,8 @@ export default function Navbar({
           <StyledLink to="/profile">Profile</StyledLink>
           <StyledLink to="/mint">Mint</StyledLink>
           <StyledLink to="/test">Test</StyledLink>
-<<<<<<< HEAD
           <StyledLink to="/quiz">Quiz</StyledLink>
-=======
->>>>>>> origin/main
+          <StyledLink to="/question">Question</StyledLink>
         </div>
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ms-auto">

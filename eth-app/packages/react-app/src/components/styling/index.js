@@ -107,3 +107,7 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 20px;
 `;
+
+export const QuizBody = styled(Body)`
+  justify-content: flex-start;
+`;
