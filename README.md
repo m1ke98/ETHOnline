@@ -11,10 +11,10 @@
   
   
 ## About
-What is POE?
+What is PoE?
 
-POE or _Proof of Experience_, allows for authentication and verification of real world experience.
-POE mints non-transferable NFT's and binds them to digital or physical credential certificates. 
+PoE or _Proof of Experience_, allows for authentication and verification of real world experience.
+PoE mints non-transferable NFT's and binds them to digital or physical credential certificates. 
 These certificates can be awared to an end user to be presented as immutable proof of a completed experience. 
 
   
