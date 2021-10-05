@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import useWeb3Modal from "./hooks/useWeb3Modal";
-
 
 // import { useQuery } from "@apollo/react-hooks";
 //import { Contract } from "@ethersproject/contracts";
