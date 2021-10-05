@@ -4,7 +4,6 @@ import { mintToken } from "./helpers/interact.js";
 
 const Test = (props) => {
 
-    //const web3Modal = props.web3Modal;
     const account = props.account;
     const provider = props.provider;
     const [status, setStatus] = useState("");
@@ -27,17 +26,17 @@ const Test = (props) => {
                 <Button onClick={onMintPressed}>Mint</Button>
                 <br/>
                 <p id="account">
-                    currentAccount: {account}
-                </p>
-                <p id="status">
-                    {status}
+                    Current Address: {account}
                 </p>
                 <p id="successful">
                     {successful}
                 </p>
+                <p id="status">
+                    {status}
+                </p>
             </Body>
         </div>
-    );
+    )
 };
 
 export default Test;

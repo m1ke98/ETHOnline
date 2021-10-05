@@ -30,3 +30,50 @@ Harry (9/28):
     - Created/Added api key and package for alchemy api
     - Added logic for using alchemy api to mint NFT and transfer to users wallet address.
     
+Errors:
+    index.js:1 Error: network does not support ENS (operation="ENS", network="unknown", code=UNSUPPORTED_OPERATION, version=providers/5.4.5)
+        at Logger.makeError (index.ts:225)
+        at Logger.throwError (index.ts:237)
+        at Web3Provider.<anonymous> (base-provider.ts:1532)
+        at Generator.next (<anonymous>)
+        at fulfilled (base-provider.ts:2)
+            console.<computed>	@	index.js:1
+            fetchAccount	@	App.js:69
+            async function (async)		
+            fetchAccount	@	App.js:54
+            (anonymous)	@	App.js:73
+            invokePassiveEffectCreate	@	react-dom.development.js:23487
+            callCallback	@	react-dom.development.js:3945
+            invokeGuardedCallbackDev	@	react-dom.development.js:3994
+            invokeGuardedCallback	@	react-dom.development.js:4056
+            flushPassiveEffectsImpl	@	react-dom.development.js:23574
+            unstable_runWithPriority	@	scheduler.development.js:468
+            runWithPriority$1	@	react-dom.development.js:11276
+            flushPassiveEffects	@	react-dom.development.js:23447
+            performSyncWorkOnRoot	@	react-dom.development.js:22269
+            (anonymous)	@	react-dom.development.js:11327
+            unstable_runWithPriority	@	scheduler.development.js:468
+            runWithPriority$1	@	react-dom.development.js:11276
+            flushSyncCallbackQueueImpl	@	react-dom.development.js:11322
+            flushSyncCallbackQueue	@	react-dom.development.js:11309
+            scheduleUpdateOnFiber	@	react-dom.development.js:21893
+            dispatchAction	@	react-dom.development.js:16139
+            fetchAccount	@	App.js:68
+            async function (async)		
+            fetchAccount	@	App.js:54
+            (anonymous)	@	App.js:73
+            invokePassiveEffectCreate	@	react-dom.development.js:23487
+            callCallback	@	react-dom.development.js:3945
+            invokeGuardedCallbackDev	@	react-dom.development.js:3994
+            invokeGuardedCallback	@	react-dom.development.js:4056
+            flushPassiveEffectsImpl	@	react-dom.development.js:23574
+            unstable_runWithPriority	@	scheduler.development.js:468
+            runWithPriority$1	@	react-dom.development.js:11276
+            flushPassiveEffects	@	react-dom.development.js:23447
+            (anonymous)	@	react-dom.development.js:23324
+            workLoop	@	scheduler.development.js:417
+            flushWork	@	scheduler.development.js:390
+
+    Error: Objects are not valid as a React child (found: object with keys 
+    {hash, type, accessList, blockHash, blockNumber, transactionIndex, confirmations, from, gasPrice, maxPriorityFeePerGas, maxFeePerGas, gasLimit, to, value, nonce, data, r, s, v, creates, chainId, wait}).
+    If you meant to render a collection of children, use an array instead.

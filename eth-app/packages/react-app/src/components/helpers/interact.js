@@ -1,20 +1,24 @@
 import { Contract } from "@ethersproject/contracts";
 import { addresses, abis } from "@project/contracts";
 
+require("dotenv").config();
 
-export const mintToken = async (account, provider) => {
-    const tokenURI = "https://gateway.pinata.cloud/ipfs/QmPRACzUUf4dZjDjMk8a7QhNuDXb952uHB5ruNieWURND9";
+const { TOKEN_URI } = process.env;
+
+export const mintToken = async(account, provider) => {
+
+    const tokenURI = TOKEN_URI;
 
     const signer = provider.getSigner();
     const poeNFT = new Contract(addresses.poeNft, abis.poeNft, signer);
 
     try {
-        const txHash = await poeNFT.mintToken(account, tokenURI);
+        const txReceipt = await poeNFT.mintToken(account, tokenURI);
 
-        await txHash.wait();
+        await txReceipt.wait();
         return {
             success: true,
-            status: txHash
+            status: "Transaction Hash: " + txReceipt.hash
         }
     } catch (error) {
         return {
