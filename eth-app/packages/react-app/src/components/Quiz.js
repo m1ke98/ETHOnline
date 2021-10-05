@@ -1,36 +1,28 @@
-import React from "react";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import { QuizBody } from "./styling";
+import { useState } from "react";
+import { QuizBody, Title } from "./styling";
+import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
+import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
 
-const Item = styled(Paper)(({ theme }) => ({
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    display: "flex",
-    flexFlow: "column",
-    height: 250,
-    justifyContent: "center",
-  }));
+import { questions } from "./helpers/quizInfo.js";
 
 export default function Quiz() {
-
     const theme = useTheme();
-    const [activeStep, setActiveStep] = React.useState(0);
-
+    const [activeStep, setActiveStep] = useState(0);
+    const maxSteps = questions.length;
+  
     const handleNext = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      
     };
   
     const handleBack = () => {
@@ -39,97 +31,52 @@ export default function Quiz() {
 
     return (
         <QuizBody>
-            <Box
-                sx={{
-                    display: 'center',
-                    flexWrap: 'wrap',
-                    '& > :not(style)': {
-                    m: 1,
-                    bgcolor: "#282c34",
-                    width: 800,
-                    height: 300,
-                    },
-                }}
-                >
-                    <Paper elevation={3}>
-                        <Grid container spacing={0} columns={20}>
-                            <Grid item xs={12}>
-                                <Item elevation={1}
-                                    sx={{
-                                        background: "none",
-                                        textAlign: "left",
-                                        justifyContent: "flex-start",
-                                        p: 3,
-                                        color: "#faf9f6",
-                                    }}
+            <Title>Sample Quiz</Title>
+            <Box sx={{ display: 'center', paddingTop: '2%', flexWrap: 'wrap', '& > :not(style)': { m: 1, bgcolor: "#282c34", width: 800, height: 350, }, }}>
+                <Paper elevation={3}>
+                    <Box  sx={{ height: 300, float: 'left', maxWidth: '70%', width: '70%', color: "#faf9f6", p: 2, }}>
+                        {questions[activeStep].question}
+                    </Box>
+                    <Box  sx={{ height: 300, float: 'right', justifyContent: 'left', alignItems: 'center', display: 'flex', maxWidth: '30%', width: '30%', color: "#faf9f6", p: 2, }}>
+                        <FormControl component="fieldset">
+                            <RadioGroup name="radio-buttons-group">
+                                <FormControlLabel value="a1" control={<Radio sx={{color: "gray",}}/>} label={questions[activeStep].a1} />
+                                <FormControlLabel value="a2" control={<Radio sx={{color: "gray",}}/>} label={questions[activeStep].a2} />
+                                <FormControlLabel value="a3" control={<Radio sx={{color: "gray",}}/>} label={questions[activeStep].a3} />
+                                <FormControlLabel value="a4" control={<Radio sx={{color: "gray",}}/>} label={questions[activeStep].a4} />
+                            </RadioGroup>
+                        </FormControl>
+                    </Box>
+                    <Box  sx={{ height: 50, maxWidth: 800, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2, }}>
+                        <MobileStepper variant="dots" steps={maxSteps} position="flex" activeStep={activeStep} sx={{ display: 'flex', width: '50%', background: 'none', }}
+                            nextButton={
+                                <Button
+                                    size="small"
+                                    onClick={handleNext}
+                                    disabled={activeStep === maxSteps - 1}
                                 >
-                                    <p>1. What is 2x2?</p>
-                                </Item>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Item elevation={1}
-                                    sx={{
-                                        background: "none",
-                                        p:3,
-                                        alignItems: "center",
-                                        color: "#faf9f6",
-                                    }}
-                                >
-                                    <FormControl component="fieldset">
-                                        <RadioGroup name="radio-buttons-group">
-                                            <FormControlLabel value="A1" control={<Radio sx={{color: "gray",}}/>} label="0" />
-                                            <FormControlLabel value="A2" control={<Radio sx={{color: "gray",}}/>} label="2" />
-                                            <FormControlLabel value="A3" control={<Radio sx={{color: "gray",}}/>} label="4" />
-                                            <FormControlLabel value="A4" control={<Radio sx={{color: "gray",}}/>} label="8" />
-                                        </RadioGroup>
-                                    </FormControl>
-                                </Item>
-                            </Grid>
-                            <Grid item xs={20}>
-                                <Item elevation={1}
-                                    sx={{
-                                        background: "none",
-                                        height: 50,
-                                        p: 1,
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <MobileStepper
-                                        variant="dots"
-                                        steps={5}
-                                        position="static"
-                                        activeStep={activeStep}
-                                        sx={{
-                                            flexGrow: 1,
-                                            width: 300,
-                                            background: 'none',
-                                        }}
-                                        nextButton={
-                                            <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-                                            Next
-                                            {theme.direction === 'rtl' ? (
-                                                <KeyboardArrowLeft />
-                                            ) : (
-                                                <KeyboardArrowRight />
-                                            )}
-                                            </Button>
-                                        }
-                                        backButton={
-                                            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                                            {theme.direction === 'rtl' ? (
-                                                <KeyboardArrowRight />
-                                            ) : (
-                                                <KeyboardArrowLeft />
-                                            )}
-                                            Back
-                                            </Button>
-                                        }
-                                    />
-                                </Item>
-                            </Grid>
-                        </Grid>
-                    </Paper>
-                </Box>
+                                    Next
+                                    {theme.direction === 'rtl' ? (
+                                        <KeyboardArrowLeft />
+                                    ) : (
+                                        <KeyboardArrowRight />
+                                    )}
+                                </Button>
+                            }
+                            backButton={
+                                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                                    {theme.direction === 'rtl' ? (
+                                        <KeyboardArrowRight />
+                                    ) : (
+                                        <KeyboardArrowLeft />
+                                    )}
+                                    Back
+                                </Button>
+                            }
+                        />
+                    </Box>
+                </Paper>
+            </Box>
         </QuizBody>
     )
 }

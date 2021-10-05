@@ -54,6 +54,20 @@ function App() {
         const accounts = await provider.listAccounts();
         setAccount(accounts[0]);
 
+        try {
+          // Resolve the ENS name for the first account.
+          const name = await provider.lookupAddress(accounts[0]);
+
+          // Render either the ENS name or the shortened account address.
+          if (name) {
+            setRendered(name);
+          } else {
+            setRendered(account.substring(0, 6) + "..." + account.substring(36));
+          }
+        } catch (err) {
+          setRendered(account.substring(0, 6) + "..." + account.substring(36));
+        }
+        /*
         // Resolve the ENS name for the first account.
         const name = await provider.lookupAddress(accounts[0]);
 
@@ -63,6 +77,7 @@ function App() {
         } else {
           setRendered(account.substring(0, 6) + "..." + account.substring(36));
         }
+        */
       } catch (err) {
         setAccount("");
         setRendered("");
@@ -114,10 +129,10 @@ function App() {
             <Test account={account} provider={provider} />
           </Route>
           <Route path="/quiz">
-            <Quiz account={account} />
+            <Quiz />
           </Route>
           <Route path="/question">
-            <Question account={account} />
+            <Question />
           </Route>
         </Switch>
       </div>
