@@ -28,9 +28,9 @@ export default function Mint({
             setTokenURI(metadata.url);
             // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
             if (tokenURI !== "") {
-                mintTokenForUri(account, provider, tokenURI).then((success, status) => {
-                    setStatus(status);
-                    if (success) {
+                mintTokenForUri(account, provider, tokenURI).then((result) => {
+                    setStatus(result.status);
+                    if (result.success) {
                         setSuccess("Success!");
                     } else {
                         setSuccess("Failed");
