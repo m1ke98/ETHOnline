@@ -4,6 +4,7 @@ import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
 import { storeNftData } from './helpers/storage';
+import { mintTokenForUri } from "./helpers/interact";
 
 
 export default function Mint({
@@ -15,45 +16,40 @@ export default function Mint({
     const [nftDescription, setNftDescription] = useState("");
     const [nftFile, setNftFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
-    const [stored, setStored] = useState(false);
-    const [tokenURI, setTokenURI] = useState(null);
+    const [tokenURI, setTokenURI] = useState("");
     const [status, setStatus] = useState("");
+    const [success, setSuccess] = useState("");
     const [minted, setMinted] = useState(null);
 
 
     const onMintSubmit = async (event) => {
         event.preventDefault();
-        storeNftData(nftName, nftDescription, nftFile).then(value => {
-            const metadata = value;
+        await storeNftData(nftName, nftDescription, nftFile).then(metadata => {
             setTokenURI(metadata.url);
-            setStored(true);
-
             // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
-            // testMintToken(account, provider, tokenURI, addresses.poeNft, abis.poeNft).then((success, status) => {
-            //     setStatus(status);
-            //     if (success) {
-            //         setSuccess("Success!");
-            //         setShowMessage(window.confirm('Token minting succeded at txHash: ' + status +
-            //             '\nPreview Url: ' + previewURL));
-            //     } else {
-            //         setSuccess("Failed");
-            //         setShowMessage(window.alert('Token failed to mint at txHash: ' + status));
+            if (tokenURI !== "") {
+                mintTokenForUri(account, provider, tokenURI).then((result) => {
+                    setStatus(result.status);
+                    if (result.success) {
+                        setSuccess("Success!");
+                    } else {
+                        setSuccess("Failed");
+                    }
 
-            //     }
 
-            // }).catch(error => {
-            //     console.log('Error occurred during minting: ' + error);
-            //     setShowMessage(window.alert('Error occurred during minting: ' + error));
-            // });
+                    window.confirm("Token Minted to Address:\n" + account +
+                        "\nStorage MetaData Token URI:\n" + tokenURI +
+                        "\nToken minting succeded at txHash:\n" + status);
+
+                }).catch(error => {
+                    console.error(error)
+                });
+            }
+
         }).catch(error => {
-            setStored(false);
             console.error(error);
         });
-        if (stored) {
-            window.confirm("Storage MetaData Token URI: " + tokenURI);
-        } else {
-            window.alert("Failed to store nft data.");
-        }
+
     }
 
     const handleImagePreview = (event) => {
