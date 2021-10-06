@@ -3,8 +3,7 @@ import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
-import { NFTStorage } from 'nft.storage';
-const NFT_STORAGE_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUwMTgyNmY5YmQ4YTgzOTU3RkE3OEE0QTkwMjk0N2E2NGJmZTQyNTkiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYzMjE4NzIyNzQ2NCwibmFtZSI6IlNvbWV0aGluZ0Nvb2xBcGlLZXkifQ.IAWS_6tZMKUhOaSRjKtr20Pjw4vO6gsGjn2Sl59jAGk";
+import { storeNftData } from './helpers/storage';
 
 
 export default function Mint({
@@ -16,52 +15,52 @@ export default function Mint({
     const [nftDescription, setNftDescription] = useState("");
     const [nftFile, setNftFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
-
+    const [stored, setStored] = useState(false);
     const [tokenURI, setTokenURI] = useState(null);
     const [status, setStatus] = useState("");
-    const [success, setSuccess] = useState("");
+    const [minted, setMinted] = useState(null);
 
-    const [previewURL, setPreviewURL] = useState(null);
 
-    const storeNftData = async (name, description, file) => {
-
-        const client = new NFTStorage({ token: NFT_STORAGE_API_KEY });
-        client.store({
-            name: name,
-            description: description,
-            image: new File([file], file.name, { type: file.type })
-        }).then(metadata => {
-            return metadata;
-        })
-    }
-
-    const onMintSubmit = async () => {
-
+    const onMintSubmit = async (event) => {
+        event.preventDefault();
         storeNftData(nftName, nftDescription, nftFile).then(value => {
             const metadata = value;
             setTokenURI(metadata.url);
-            setPreviewURL(metadata.embed());
+            setStored(true);
 
+            // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
+            // testMintToken(account, provider, tokenURI, addresses.poeNft, abis.poeNft).then((success, status) => {
+            //     setStatus(status);
+            //     if (success) {
+            //         setSuccess("Success!");
+            //         setShowMessage(window.confirm('Token minting succeded at txHash: ' + status +
+            //             '\nPreview Url: ' + previewURL));
+            //     } else {
+            //         setSuccess("Failed");
+            //         setShowMessage(window.alert('Token failed to mint at txHash: ' + status));
 
-        }).catch(error => console.error(error));
+            //     }
 
-
-        // const { success, status } = await mintToken(account, provider, tokenURI);
-        // setStatus(status);
-        // if (success) {
-        //     setSuccess("Success!");
-        //     window.confirm('Token minting succeded at txHash: ' + status);
-        // } else {
-        //     setSuccess("Failed");
-        //     window.alert('Token failed to mint at txHash: ' + status);
-
-        // }
-    };
+            // }).catch(error => {
+            //     console.log('Error occurred during minting: ' + error);
+            //     setShowMessage(window.alert('Error occurred during minting: ' + error));
+            // });
+        }).catch(error => {
+            setStored(false);
+            console.error(error);
+        });
+        if (stored) {
+            window.confirm("Storage MetaData Token URI: " + tokenURI);
+        } else {
+            window.alert("Failed to store nft data.");
+        }
+    }
 
     const handleImagePreview = (event) => {
         setImagePreview(URL.createObjectURL(event.target.files[0]));
 
     }
+
     const preview = (
         <img src={imagePreview} height="160" width="auto" alt="selected preview here" />);
 
@@ -118,8 +117,8 @@ export default function Mint({
                             </form>
 
                         </CardWrapper>
-
                     </MintBody>
+
                 </div>
             </div >
         )

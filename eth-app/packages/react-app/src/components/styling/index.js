@@ -26,7 +26,7 @@ export const PageHeader = styled.span`
 
 
 export const MintBody = styled.div`
-  align-items: stretch;
+  align-items: top;
   background-color: #282c34;
   color: white;
   display: flex;
