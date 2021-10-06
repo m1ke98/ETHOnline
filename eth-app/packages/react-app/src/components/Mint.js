@@ -73,21 +73,19 @@ export default function Mint({
                                 <CardBody className="card-body">
                                     <div className="row text-center">
                                         <span>
-                                            <label htmlFor="Title" style={{ padding: 1 + 'rem' }}>Title: </label>
                                             <input type="text"
                                                 id="Title"
                                                 placeholder="Title Here"
                                                 onChange={e => {
                                                     setNftName(e.target.value);
                                                 }}
-                                                required></input>
+                                                required style={{ margin: 2 + 'rem', width: 60 + '%' }}></input>
                                         </span>
                                     </div>
                                     <div className="row text-center">
-                                        <label htmlFor="Description" style={{ padding: 1 + 'rem' }}>Description: </label>
                                         <textarea rows="5" cols="50" id="Description" placeholder="Describe your NFT here" onChange={e => {
                                             setNftDescription(e.target.value);
-                                        }} required></textarea>
+                                        }} required style={{ marginBottom: 2 + 'rem' }}></textarea>
                                     </div>
                                     <div className="row text-center">
                                         <span>
