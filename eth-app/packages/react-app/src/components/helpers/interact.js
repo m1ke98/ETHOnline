@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const { TOKEN_URI } = process.env;
 
-export const mintToken = async(account, provider) => {
+export const mintToken = async (account, provider) => {
 
     const tokenURI = TOKEN_URI;
 
@@ -28,18 +28,18 @@ export const mintToken = async(account, provider) => {
     }
 }
 
-export const testMintLocal = async (account, provider, tokenURI, contractAddress, abi) => {
+export const mintTokenForUri = async (account, provider, tokenURI) => {
 
     const signer = provider.getSigner();
-    const poeNFT = new Contract(contractAddress, abi, signer);
+    const poeNFT = new Contract(addresses.poeNft, abis.poeNft, signer);
 
     try {
-        const txHash = await poeNFT.mintToken(account, tokenURI);
+        const txReceipt = await poeNFT.mintToken(account, tokenURI);
 
-        await txHash.wait();
+        await txReceipt.wait();
         return {
             success: true,
-            status: txHash
+            status: "Transaction Hash: " + txReceipt.hash
         }
     } catch (error) {
         return {
