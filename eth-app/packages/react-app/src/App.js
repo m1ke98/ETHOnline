@@ -20,7 +20,6 @@ import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
 import Test from "./components/Test.js";
 import Quiz from "./components/Quiz.js";
-import Question from "./components/Question.js";
 
 /*
 async function readOnChainData() {
@@ -128,9 +127,6 @@ function App() {
           </Route>
           <Route path="/quiz">
             <Quiz />
-          </Route>
-          <Route path="/question">
-            <Question />
           </Route>
         </Switch>
       </div>
