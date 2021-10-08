@@ -53,9 +53,12 @@ export default function Mint({
                 ${metadata.url}\n
                 Token minting succeded at txHash: \n
                 ${res.status}`);
+
                 handleOpen();
+                
                 setProgress(null);
-                // event.target.reset();
+                event.target.reset();
+                setImagePreview(null);
 
             }
 
