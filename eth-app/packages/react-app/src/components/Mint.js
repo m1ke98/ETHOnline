@@ -7,6 +7,8 @@ import { storeNftData } from './helpers/storage';
 import { mintTokenForUri } from "./helpers/interact";
 import BasicModal from "./styling/BasicModal";
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
+import { Switch, FormControlLabel } from '@mui/material';
+
 
 
 
@@ -24,6 +26,8 @@ export default function Mint({
     const [progress, setProgress] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState("");
+    const [externalProof, setExternalProof] = useState(false);
+
 
     const handleOpen = () => setModalOpen(true);
     const handleClose = () => {
@@ -31,19 +35,40 @@ export default function Mint({
     };
 
 
-
     const onMintSubmit = async (event) => {
         event.preventDefault();
         setProgress((<CircularProgress variant="indeterminate" />));
-        const metadata = await storeNftData(nftName, nftDescription, nftFile);
-        if (metadata) {
-            setTokenURI(metadata.url);
-            // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
-            const res = await mintTokenForUri(account, provider, metadata.url);
+        if (!externalProof) {
+            const metadata = await storeNftData(nftName, nftDescription, nftFile);
+            if (metadata) {
+                setTokenURI(metadata.url);
+                // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
+                const res = await mintTokenForUri(account, provider, metadata.url);
+                if (res.success) {
+                    setModalContent({
+                        toAccount: account,
+                        url: metadata.url,
+                        txStatus: res.status
+                    });
+
+                    handleOpen();
+
+                    setProgress(null);
+                    event.target.reset();
+                    setImagePreview(null);
+
+                } else {
+                    window.alert(res.status);
+                }
+
+            }
+        } else {
+            // TODO: Confirm the provided TokenURI is legit before minting
+            const res = await mintTokenForUri(account, provider, tokenURI);
             if (res.success) {
                 setModalContent({
                     toAccount: account,
-                    url: metadata.url,
+                    url: tokenURI,
                     txStatus: res.status
                 });
 
@@ -56,7 +81,6 @@ export default function Mint({
             } else {
                 window.alert(res.status);
             }
-
         }
 
 
@@ -86,7 +110,7 @@ export default function Mint({
                                         <span>
                                             <input type="text"
                                                 id="Title"
-                                                placeholder="Name Your NFT Here"
+                                                placeholder="Name of your experience"
                                                 onChange={e => {
                                                     setNftName(e.target.value);
                                                 }}
@@ -94,7 +118,7 @@ export default function Mint({
                                         </span>
                                     </div>
                                     <div className="row text-center">
-                                        <textarea rows="5" cols="50" id="Description" placeholder="Describe your NFT here" onChange={e => {
+                                        <textarea rows="5" cols="50" id="Description" placeholder="Describe your experience here" onChange={e => {
                                             setNftDescription(e.target.value);
                                         }} required style={{ marginBottom: 2 + 'rem' }}></textarea>
                                     </div>
@@ -103,15 +127,47 @@ export default function Mint({
                                             <input type="file"
                                                 accept="audio/*, video/*, image/*, .html, .pdf"
                                                 id="upload-media"
+                                                disabled={externalProof}
                                                 onChange={e => {
                                                     setNftFile(e.target.files[0]);
                                                     handleImagePreview(e);
                                                 }}
                                                 required>
                                             </input>
-                                            <label htmlFor="upload-media" style={{ padding: 0.1 + 'rem' }}>(Supports JPG, PNG and MP4 videos.Max file size: 10MB.)</label>
+                                            <label htmlFor="upload-media" style={{ padding: 0.1 + 'rem' }}>Evidence  of experience (e.g audio/*, video/*, image/*, .html, .pdf)</label>
                                         </span>
                                     </div>
+                                    <div className="row text-center">
+                                        <FormControlLabel
+                                            sx={{
+                                                display: 'block',
+                                            }}
+                                            control={
+                                                <Switch
+                                                    checked={externalProof}
+                                                    onChange={() => {
+                                                        setExternalProof(!externalProof);
+                                                        setImagePreview(null);
+                                                        setNftFile(null);
+                                                    }}
+                                                    name="proofSelector"
+                                                    color="primary"
+                                                />
+                                            }
+                                            label="Link an existing  asset"
+                                        />
+                                        <span>
+                                            <input type="text"
+                                                id="linkToAsset"
+                                                disabled={!externalProof}
+                                                placeholder="e.g. ipfs://<hash>"
+                                                onChange={e => {
+                                                    setTokenURI(e.target.value);
+                                                }}
+                                                required style={{ margin: 2 + 'rem', width: 60 + '%' }}></input>
+                                        </span>
+                                    </div>
+
                                     <div className="card-footer">
                                         <CardButton type="submit">Mint</CardButton>
                                     </div>
@@ -120,10 +176,9 @@ export default function Mint({
                                     </div>
                                 </CardBody>
                             </form>
-
                         </CardWrapper>
                     </MintBody>
-                    <BasicModal open={modalOpen} handleClose={handleClose} title={"Minting Result"} content={modalContent} ></BasicModal>
+                    <BasicModal open={modalOpen} handleClose={handleClose} title={"Mint Experience, Success!"} content={modalContent} ></BasicModal>
                 </div>
             </div>
         )
