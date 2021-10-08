@@ -3,8 +3,14 @@ import { MintBody, Title, TitleIcon, PageHeader } from "./styling";
 import { GiMonaLisa } from "react-icons/gi";
 import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
-import { NFTStorage } from 'nft.storage';
-const NFT_STORAGE_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUwMTgyNmY5YmQ4YTgzOTU3RkE3OEE0QTkwMjk0N2E2NGJmZTQyNTkiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYzMjE4NzIyNzQ2NCwibmFtZSI6IlNvbWV0aGluZ0Nvb2xBcGlLZXkifQ.IAWS_6tZMKUhOaSRjKtr20Pjw4vO6gsGjn2Sl59jAGk";
+import { storeNftData } from './helpers/storage';
+import { mintTokenForUri } from "./helpers/interact";
+import BasicModal from "./styling/BasicModal";
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
+import { Switch, FormControlLabel } from '@mui/material';
+
+
+
 
 
 export default function Mint({
@@ -16,52 +22,75 @@ export default function Mint({
     const [nftDescription, setNftDescription] = useState("");
     const [nftFile, setNftFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
-
-    const [tokenURI, setTokenURI] = useState(null);
-    const [status, setStatus] = useState("");
-    const [success, setSuccess] = useState("");
-
-    const [previewURL, setPreviewURL] = useState(null);
-
-    const storeNftData = async (name, description, file) => {
-
-        const client = new NFTStorage({ token: NFT_STORAGE_API_KEY });
-        client.store({
-            name: name,
-            description: description,
-            image: new File([file], file.name, { type: file.type })
-        }).then(metadata => {
-            return metadata;
-        })
-    }
-
-    const onMintSubmit = async () => {
-
-        storeNftData(nftName, nftDescription, nftFile).then(value => {
-            const metadata = value;
-            setTokenURI(metadata.url);
-            setPreviewURL(metadata.embed());
+    const [tokenURI, setTokenURI] = useState("");
+    const [progress, setProgress] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+    const [externalProof, setExternalProof] = useState(false);
 
 
-        }).catch(error => console.error(error));
-
-
-        // const { success, status } = await mintToken(account, provider, tokenURI);
-        // setStatus(status);
-        // if (success) {
-        //     setSuccess("Success!");
-        //     window.confirm('Token minting succeded at txHash: ' + status);
-        // } else {
-        //     setSuccess("Failed");
-        //     window.alert('Token failed to mint at txHash: ' + status);
-
-        // }
+    const handleOpen = () => setModalOpen(true);
+    const handleClose = () => {
+        setModalOpen(false)
     };
+
+
+    const onMintSubmit = async (event) => {
+        event.preventDefault();
+        setProgress((<CircularProgress variant="indeterminate" />));
+        if (!externalProof) {
+            const metadata = await storeNftData(nftName, nftDescription, nftFile);
+            if (metadata) {
+                setTokenURI(metadata.url);
+                // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
+                const res = await mintTokenForUri(account, provider, metadata.url);
+                if (res.success) {
+                    setModalContent({
+                        toAccount: account,
+                        url: metadata.url,
+                        txStatus: res.status
+                    });
+
+                    handleOpen();
+
+                    setProgress(null);
+                    event.target.reset();
+                    setImagePreview(null);
+
+                } else {
+                    window.alert(res.status);
+                }
+
+            }
+        } else {
+            // TODO: Confirm the provided TokenURI is legit before minting
+            const res = await mintTokenForUri(account, provider, tokenURI);
+            if (res.success) {
+                setModalContent({
+                    toAccount: account,
+                    url: tokenURI,
+                    txStatus: res.status
+                });
+
+                handleOpen();
+
+                setProgress(null);
+                event.target.reset();
+                setImagePreview(null);
+
+            } else {
+                window.alert(res.status);
+            }
+        }
+
+
+    }
 
     const handleImagePreview = (event) => {
         setImagePreview(URL.createObjectURL(event.target.files[0]));
 
     }
+
     const preview = (
         <img src={imagePreview} height="160" width="auto" alt="selected preview here" />);
 
@@ -70,6 +99,7 @@ export default function Mint({
             <div>
                 <PageHeader>
                     <TitleIcon><GiMonaLisa /> </TitleIcon> <Title>Mint</Title>
+                    {progress}
                 </PageHeader>
                 <div className="container-fluid w-100 p-0 m-0">
                     <MintBody style={{ top: 0 }}>
@@ -78,36 +108,66 @@ export default function Mint({
                                 <CardBody className="card-body">
                                     <div className="row text-center">
                                         <span>
-                                            <label htmlFor="Title" style={{ padding: 1 + 'rem' }}>Title: </label>
                                             <input type="text"
                                                 id="Title"
-                                                placeholder="Title Here"
+                                                placeholder="Name of your experience"
                                                 onChange={e => {
                                                     setNftName(e.target.value);
                                                 }}
-                                                required></input>
+                                                required style={{ margin: 2 + 'rem', width: 60 + '%' }}></input>
                                         </span>
                                     </div>
                                     <div className="row text-center">
-                                        <label htmlFor="Description" style={{ padding: 1 + 'rem' }}>Description: </label>
-                                        <textarea rows="5" cols="50" id="Description" placeholder="Describe your NFT here" onChange={e => {
+                                        <textarea rows="5" cols="50" id="Description" placeholder="Describe your experience here" onChange={e => {
                                             setNftDescription(e.target.value);
-                                        }} required></textarea>
+                                        }} required style={{ marginBottom: 2 + 'rem' }}></textarea>
                                     </div>
                                     <div className="row text-center">
                                         <span>
                                             <input type="file"
                                                 accept="audio/*, video/*, image/*, .html, .pdf"
                                                 id="upload-media"
+                                                disabled={externalProof}
                                                 onChange={e => {
                                                     setNftFile(e.target.files[0]);
                                                     handleImagePreview(e);
                                                 }}
                                                 required>
                                             </input>
-                                            <label htmlFor="upload-media" style={{ padding: 0.1 + 'rem' }}>(Supports JPG, PNG and MP4 videos.Max file size: 10MB.)</label>
+                                            <label htmlFor="upload-media" style={{ padding: 0.1 + 'rem' }}>Evidence  of experience (e.g audio/*, video/*, image/*, .html, .pdf)</label>
                                         </span>
                                     </div>
+                                    <div className="row text-center">
+                                        <FormControlLabel
+                                            sx={{
+                                                display: 'block',
+                                            }}
+                                            control={
+                                                <Switch
+                                                    checked={externalProof}
+                                                    onChange={() => {
+                                                        setExternalProof(!externalProof);
+                                                        setImagePreview(null);
+                                                        setNftFile(null);
+                                                    }}
+                                                    name="proofSelector"
+                                                    color="primary"
+                                                />
+                                            }
+                                            label="Link an existing  asset"
+                                        />
+                                        <span>
+                                            <input type="text"
+                                                id="linkToAsset"
+                                                disabled={!externalProof}
+                                                placeholder="e.g. ipfs://<hash>"
+                                                onChange={e => {
+                                                    setTokenURI(e.target.value);
+                                                }}
+                                                required style={{ margin: 2 + 'rem', width: 60 + '%' }}></input>
+                                        </span>
+                                    </div>
+
                                     <div className="card-footer">
                                         <CardButton type="submit">Mint</CardButton>
                                     </div>
@@ -116,19 +176,18 @@ export default function Mint({
                                     </div>
                                 </CardBody>
                             </form>
-
                         </CardWrapper>
-
                     </MintBody>
+                    <BasicModal open={modalOpen} handleClose={handleClose} title={"Mint Experience, Success!"} content={modalContent} ></BasicModal>
                 </div>
-            </div >
+            </div>
         )
     }
 
     web3Modal();
     return (<div>
         <Body>
-            Please connect to continue...
+            Please connect MetaMask to continue...
         </Body>
     </div>);
 }
