@@ -10,9 +10,6 @@ import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 import { Switch, FormControlLabel } from '@mui/material';
 
 
-
-
-
 export default function Mint({
     provider,
     web3Modal,
