@@ -5,10 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 .navbar {
   background-color: #282c34;
+  overflow: hidden;
 }
 
 .dapp-title {
