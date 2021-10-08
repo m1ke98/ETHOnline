@@ -1,5 +1,4 @@
 import { NFTStorage, File } from 'nft.storage';
-// import { NFT_STORAGE_API_KEY } from '../../constants';
 require("dotenv").config();
 const NFT_STORAGE_API_KEY = process.env.REACT_APP_NFT_STORAGE_API_KEY;
 
