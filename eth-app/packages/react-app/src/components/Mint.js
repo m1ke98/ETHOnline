@@ -5,6 +5,10 @@ import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
 import { storeNftData } from './helpers/storage';
 import { mintTokenForUri } from "./helpers/interact";
+import BasicModal from "./styling/BasicModal";
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
+
+
 
 
 export default function Mint({
@@ -18,37 +22,45 @@ export default function Mint({
     const [imagePreview, setImagePreview] = useState(null);
     const [tokenURI, setTokenURI] = useState("");
     const [status, setStatus] = useState("");
-    const [success, setSuccess] = useState("");
-    const [minted, setMinted] = useState(null);
+    const [data, setData] = useState(null);
+
+
+    const [progress, setProgress] = useState(null);
+
+
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const handleOpen = () => setModalOpen(true);
+    const handleClose = () => {
+        setModalOpen(false)
+    };
+
+    const [modalContent, setModalContent] = useState("");
 
 
     const onMintSubmit = async (event) => {
         event.preventDefault();
-        await storeNftData(nftName, nftDescription, nftFile).then(metadata => {
+        setProgress((<CircularProgress variant="indeterminate" />));
+        const metadata = await storeNftData(nftName, nftDescription, nftFile);
+        if (metadata) {
             setTokenURI(metadata.url);
             // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
-            if (tokenURI !== "") {
-                mintTokenForUri(account, provider, tokenURI).then((result) => {
-                    setStatus(result.status);
-                    if (result.success) {
-                        setSuccess("Success!");
-                    } else {
-                        setSuccess("Failed");
-                    }
+            const res = await mintTokenForUri(account, provider, metadata.url);
+            if (res.success) {
+                setModalContent(`Token Minted to Address:\n
+                ${account} \n
+                Storage MetaData Token URI:\n
+                ${metadata.url}\n
+                Token minting succeded at txHash: \n
+                ${res.status}`);
+                handleOpen();
+                setProgress(null);
+                // event.target.reset();
 
-
-                    window.confirm("Token Minted to Address:\n" + account +
-                        "\nStorage MetaData Token URI:\n" + tokenURI +
-                        "\nToken minting succeded at txHash:\n" + status);
-
-                }).catch(error => {
-                    console.error(error)
-                });
             }
 
-        }).catch(error => {
-            console.error(error);
-        });
+        }
+
 
     }
 
@@ -65,6 +77,7 @@ export default function Mint({
             <div>
                 <PageHeader>
                     <TitleIcon><GiMonaLisa /> </TitleIcon> <Title>Mint</Title>
+                    {progress}
                 </PageHeader>
                 <div className="container-fluid w-100 p-0 m-0">
                     <MintBody style={{ top: 0 }}>
@@ -112,9 +125,9 @@ export default function Mint({
 
                         </CardWrapper>
                     </MintBody>
-
+                    <BasicModal open={modalOpen} handleClose={handleClose} title={"Minting Result"} content={modalContent} ></BasicModal>
                 </div>
-            </div >
+            </div>
         )
     }
 

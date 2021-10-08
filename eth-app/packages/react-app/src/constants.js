@@ -1,6 +1,5 @@
 export const INFURA_API_KEY = "b58725ea45f647beac39eee4a2b379f0"; 
 export const ALCHEMY_KEY = "lLk1Rpr7uwV5uFHYspWGReUfF8yEMMTS";
-export const NFT_STORAGE_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDk0MWM3M2QwOTQyMTlDQzA0N0Q4MTc4ODMzNjM4ZWQzYTk4ODBBMDQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYzMzI2OTQ2MzA4NSwibmFtZSI6IlBvRSJ9.Fq37MZTciXPS3_uWjtQy2geZ_9sBnhk8F0egg5_ugrM";
 
 export const NETWORKS = {
     localhost: {
