@@ -12,7 +12,7 @@ const style = {
   width: 'auto',
   bgcolor: 'black',
   border: '2px solid #000',
-  color:'white',
+  color: 'white',
   boxShadow: 24,
   p: 4,
 };
@@ -28,11 +28,19 @@ export default function BasicModal({ title, content, open, handleClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" align="center">
             {title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {content}
+            <em>Token Minted to Address:</em> <br />
+            {content.toAccount}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+           <em> Storage MetaData Token URI:</em> <br />
+            {content.url}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 1 }}>
+            {content.txStatus}
           </Typography>
         </Box>
       </Modal>
