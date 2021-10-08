@@ -21,21 +21,15 @@ export default function Mint({
     const [nftFile, setNftFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [tokenURI, setTokenURI] = useState("");
-    const [status, setStatus] = useState("");
-    const [data, setData] = useState(null);
-
-
     const [progress, setProgress] = useState(null);
-
-
-
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState("");
+
     const handleOpen = () => setModalOpen(true);
     const handleClose = () => {
         setModalOpen(false)
     };
 
-    const [modalContent, setModalContent] = useState("");
 
 
     const onMintSubmit = async (event) => {
@@ -47,19 +41,20 @@ export default function Mint({
             // Confirm NFT MetaData was pinned to ipfs (nft.storage) before minting
             const res = await mintTokenForUri(account, provider, metadata.url);
             if (res.success) {
-                setModalContent(`Token Minted to Address:\n
-                ${account} \n
-                Storage MetaData Token URI:\n
-                ${metadata.url}\n
-                Token minting succeded at txHash: \n
-                ${res.status}`);
+                setModalContent({
+                    toAccount: account,
+                    url: metadata.url,
+                    txStatus: res.status
+                });
 
                 handleOpen();
-                
+
                 setProgress(null);
                 event.target.reset();
                 setImagePreview(null);
 
+            } else {
+                window.alert(res.status);
             }
 
         }
@@ -91,7 +86,7 @@ export default function Mint({
                                         <span>
                                             <input type="text"
                                                 id="Title"
-                                                placeholder="Title Here"
+                                                placeholder="Name Your NFT Here"
                                                 onChange={e => {
                                                     setNftName(e.target.value);
                                                 }}
@@ -137,7 +132,7 @@ export default function Mint({
     web3Modal();
     return (<div>
         <Body>
-            Please connect to continue...
+            Please connect MetaMask to continue...
         </Body>
     </div>);
 }

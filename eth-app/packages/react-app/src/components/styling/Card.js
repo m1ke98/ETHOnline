@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { Card, Paper } from "@mui/material";
 
 export const CardWrapper = styled.div`
   overflow: hidden;
@@ -8,10 +9,9 @@ export const CardWrapper = styled.div`
   width: 60vw;
   max-width: 60vw;
   font-family: inherit;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 20px rgb(234, 238, 229, 0.10), 0px 0px 20px rgb(234, 238, 229, 0.10);
   border-radius: 5px;
-  background-color: #CD5C5C;
-;
+  background-color: #97004a;
 `;
 
 export const CardHeader = styled.header`
@@ -77,22 +77,22 @@ export const CardIcon = styled.span`
   }
 
   ${props =>
-        props.big &&
-        css`
+    props.big &&
+    css`
       font-size: 26px;
     `}
 
   ${props =>
-        props.eye &&
-        css`
+    props.eye &&
+    css`
       position: absolute;
       top: 8px;
       right: 0;
     `}
 
   ${props =>
-        props.small &&
-        css`
+    props.small &&
+    css`
       font-size: 14px;
     `}
 `;
