@@ -13,6 +13,7 @@ const style = {
   bgcolor: 'black',
   border: '2px solid #000',
   color: 'white',
+  borderRadius:'1px',
   boxShadow: 24,
   p: 4,
 };
@@ -32,11 +33,11 @@ export default function BasicModal({ title, content, open, handleClose }) {
             {title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <em>Token Minted to Address:</em> <br />
+            <b><em>Token Minted to Address:</em></b> <br />
             {content.toAccount}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 1 }}>
-           <em> Storage MetaData Token URI:</em> <br />
+          <b> <em> Storage MetaData Token URI:</em></b> <br />
             {content.url}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 1 }}>
