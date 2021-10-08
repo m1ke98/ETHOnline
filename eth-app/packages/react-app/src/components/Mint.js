@@ -5,11 +5,9 @@ import { CardWrapper, CardBody, CardButton } from "./styling/Card";
 import { Body } from "./styling";
 import { storeNftData } from './helpers/storage';
 import { mintTokenForUri } from "./helpers/interact";
-import BasicModal from "./styling/BasicModal";
+import BasicModal from "./BasicModal";
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 import { Switch, FormControlLabel } from '@mui/material';
-
-
 
 
 
@@ -187,7 +185,7 @@ export default function Mint({
     web3Modal();
     return (<div>
         <Body>
-            Please connect MetaMask to continue...
+            Please Connect Wallet...
         </Body>
     </div>);
 }

@@ -1,6 +1,6 @@
 import { MintBody, Title } from "./styling";
 import image2 from "../assets/image2.png";
-import ProfileCard from "./styling/ProfileCard";
+import ProfileCard from "./ProfileCard";
 
 export default function Profile() {
 

@@ -45,4 +45,5 @@ npx hardhat run scripts/{deploy-script-here.js} --network localhost
 
 Example:
 npx hardhat run scripts/deploy-nft721.js --network localhost
+npx hardhat run scripts/deploy.js --network localhost
 
