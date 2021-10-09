@@ -8,6 +8,7 @@ import { mintTokenForUri } from "./helpers/interact";
 import BasicModal from "./BasicModal";
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 import { Switch, FormControlLabel } from '@mui/material';
+import SignInPrompt from "./SignInPrompt";
 
 
 
@@ -182,10 +183,5 @@ export default function Mint({
         )
     }
 
-    web3Modal();
-    return (<div>
-        <Body>
-            Please Connect Wallet...
-        </Body>
-    </div>);
+    return (<SignInPrompt web3Modal={web3Modal} />);
 }
