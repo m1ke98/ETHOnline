@@ -126,7 +126,7 @@ function App() {
             <Test account={account} provider={provider} />
           </Route>
           <Route path="/quiz">
-            <Quiz />
+            <Quiz account={account} provider={provider} />
           </Route>
         </Switch>
       </div>

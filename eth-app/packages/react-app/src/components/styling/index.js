@@ -75,6 +75,15 @@ export const Image = styled.img`
   pointer-events: none;
 `;
 
+export const QuizImage = styled.img`
+  height: 40vmin;
+  pointer-events: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+`;
+
 export const StdLink = styled.a.attrs({
   target: "_blank",
   rel: "noopener noreferrer",
@@ -106,6 +115,16 @@ export const StyledLink = styled(Link)`
   margin: 20px;
   text-decoration: none;
   font-size: 20px;
+`;
+
+export const SpecialLink = styled(Link)`
+  color: #CD5C5C;
+  display: flex;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const QuizBody = styled(Body)`

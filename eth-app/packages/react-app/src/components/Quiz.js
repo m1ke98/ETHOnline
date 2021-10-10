@@ -20,7 +20,9 @@ import Typography from '@mui/material/Typography';
 
 import { questions, quizAnswers } from "./helpers/quizInfo.js";
 
-export default function Quiz() {
+import QuizMint from "../components/QuizMint.js";
+
+export default function Quiz(props) {
 
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
@@ -93,7 +95,7 @@ export default function Quiz() {
                                         {score}%
                                     </Typography>
                                     <CardActions sx={{justifyContent: 'center', mt: 2}}>
-                                        <Button variant="outlined" size="small">Mint</Button>
+                                        <QuizMint account={props.account} provider={props.provider} score={score} />
                                     </CardActions>
                                 </CardContent>
                             </Card>

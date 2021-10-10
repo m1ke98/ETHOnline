@@ -3,11 +3,9 @@ import { addresses, abis } from "@project/contracts";
 
 require("dotenv").config();
 
-const { TOKEN_URI } = process.env;
-
 export const mintToken = async (account, provider) => {
 
-    const tokenURI = TOKEN_URI;
+    const tokenURI = "https://gateway.pinata.cloud/ipfs/QmPRACzUUf4dZjDjMk8a7QhNuDXb952uHB5ruNieWURND9";
 
     const signer = provider.getSigner();
     const poeNFT = new Contract(addresses.poeNft, abis.poeNft, signer);
