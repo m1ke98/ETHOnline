@@ -15,16 +15,14 @@ const QuizMint = (props) => {
     const account = props.account;
     const provider = props.provider;
     const score = props.score;
+    const quiz = props.quiz;
     const [status, setStatus] = useState("");
     const [successful, setSuccess] = useState(false);
     const [open, setOpen] = useState(false);
     
     const handleOpen = () => setOpen(true);
     
-    const handleClose = () => {
-
-        setOpen(false);
-    }
+    const handleClose = () => setOpen(false);
 
     const onMintPressed = async () => {
         const { success, status } = await mintToken(account, provider);
@@ -62,7 +60,7 @@ const QuizMint = (props) => {
                     <Box sx={style}>
                         <QuizImage src={logo} />
                         <Typography id="modal-modal-title" variant="h5" align='center'>
-                            Sample Quiz Certificate
+                            {quiz} Certificate
                         </Typography>
                         <Typography variant='h6' id="modal-modal-description" align='center' sx={{ mt: 2 }}>
                             Address

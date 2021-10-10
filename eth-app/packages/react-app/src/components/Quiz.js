@@ -18,7 +18,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-import { questions, quizAnswers } from "./helpers/quizInfo.js";
+import { quiz, questions, quizAnswers } from "./helpers/quizInfo.js";
 
 import QuizMint from "../components/QuizMint.js";
 
@@ -81,7 +81,7 @@ export default function Quiz(props) {
 
     return (
         <QuizBody>
-            <Title>Sample Quiz</Title>
+            <Title>{quiz.name}</Title>
             <Box sx={{ display: 'center', paddingTop: '2%', flexWrap: 'wrap', '& > :not(style)': { m: 1, bgcolor: "#282c34", width: 800, height: 350, }, }}>
                 <Paper elevation={3}>
                     {activeStep === questions.length &&
@@ -95,7 +95,7 @@ export default function Quiz(props) {
                                         {score}%
                                     </Typography>
                                     <CardActions sx={{justifyContent: 'center', mt: 2}}>
-                                        <QuizMint account={props.account} provider={props.provider} score={score} />
+                                        <QuizMint account={props.account} provider={props.provider} score={score} quiz={quiz.name} />
                                     </CardActions>
                                 </CardContent>
                             </Card>
