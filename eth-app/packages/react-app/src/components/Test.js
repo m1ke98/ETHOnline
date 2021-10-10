@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Body, Title, Button } from "./styling";
-import { mintToken } from "./helpers/interact.js";
+import { getTokenUri } from "./helpers/interact.js";
 
 const Test = (props) => {
 
@@ -9,8 +9,8 @@ const Test = (props) => {
     const [status, setStatus] = useState("");
     const [successful, setSuccess] = useState("");
 
-    const onMintPressed = async () => {
-        const { success, status } = await mintToken(account, provider);
+    const onTokenData = async () => {
+        const { success, status } = await getTokenUri(account, provider, 2);
         setStatus(status);
         if (success) {
             setSuccess("Success!");
@@ -23,7 +23,7 @@ const Test = (props) => {
         <div>
             <Title>Test</Title>
             <Body>
-                <Button onClick={onMintPressed}>Mint</Button>
+                <Button onClick={onTokenData}>Get Data</Button>
                 <br/>
                 <p id="account">
                     Current Address: {account}

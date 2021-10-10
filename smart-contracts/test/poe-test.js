@@ -48,4 +48,6 @@ describe("Token contract", function () {
             expect(await poeNft.ownerOf(1)).to.equal(owner.address);
         });
     });
+
+    
 });
