@@ -5,12 +5,13 @@ import { getTxHistoryByAddress } from "./components/helpers/http-client";
 import { addresses } from "@project/contracts";
 
 
+
 import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
-import Quiz from "./components/Quiz.js";
 // import Test from "./components/Test.js";
+import Quiz from "./components/Quiz.js";
 
 function App() {
 
