@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Body, Title, Button } from "./styling";
 import { mintToken } from "./helpers/interact.js";
 
-const Test = (props) => {
+const Test = ({ account, provider, txHistory }) => {
 
-    const account = props.account;
-    const provider = props.provider;
     const [status, setStatus] = useState("");
     const [successful, setSuccess] = useState("");
 
@@ -24,9 +22,12 @@ const Test = (props) => {
             <Title>Test</Title>
             <Body>
                 <Button onClick={onMintPressed}>Mint</Button>
-                <br/>
+                <br />
                 <p id="account">
                     Current Address: {account}
+                </p>
+                <p id="account">
+                    Current Addresses transaction history: {JSON.stringify(txHistory)}
                 </p>
                 <p id="successful">
                     {successful}
