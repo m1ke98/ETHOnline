@@ -33,7 +33,7 @@ export default function Quiz() {
 
     useEffect(() => {
         generateScore();
-    }, [answers]);
+    });
 
     const handleChange = (e) => {
         setChoice(e.target.value);
