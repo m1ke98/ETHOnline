@@ -1,3 +1,8 @@
+export const quiz = {
+        name: 'Crypto Quiz',
+        image: 'poe.png',
+};
+
 export const questions = [
     {
         number: 1,
@@ -17,7 +22,7 @@ export const questions = [
     },
     {
         number: 3,
-        question: 'Which project created the first NFTs on Ethereum?',
+        question: 'Which project created the first NFTs on the Ethereum blockchain?',
         a1: 'CryptoKitties',
         a2: 'Axie Infinity',
         a3: 'Decentraland',
@@ -25,7 +30,7 @@ export const questions = [
     },
     {
         number: 4,
-        question: 'What is the total number of Bitcoins that can exist?',
+        question: 'What is the total number of Bitcoins that can ever exist?',
         a1: '1,000,000',
         a2: '21,000,000',
         a3: '21,000',

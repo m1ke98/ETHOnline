@@ -8,8 +8,8 @@ import { mintTokenForUri } from "./helpers/interact";
 import BasicModal from "./BasicModal";
 import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
 import { Switch, FormControlLabel } from '@mui/material';
-import SignInPrompt from "./SignInPrompt";
 
+import SignInPrompt from "./SignInPrompt";
 
 
 export default function Mint({

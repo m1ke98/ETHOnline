@@ -3,11 +3,7 @@ import { addresses, abis } from "@project/contracts";
 
 require("dotenv").config();
 
-const { TOKEN_URI } = process.env;
-
-export const mintToken = async (account, provider) => {
-
-    const tokenURI = TOKEN_URI;
+export const mintToken = async (account, provider, tokenURI) => {
 
     const signer = provider.getSigner();
     const poeNFT = new Contract(addresses.poeNft, abis.poeNft, signer);

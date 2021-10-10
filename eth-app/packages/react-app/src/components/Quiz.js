@@ -18,9 +18,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-import { questions, quizAnswers } from "./helpers/quizInfo.js";
+import { quiz, questions, quizAnswers } from "./helpers/quizInfo.js";
 
-export default function Quiz() {
+import QuizMint from "../components/QuizMint.js";
+
+export default function Quiz(props) {
 
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
@@ -29,11 +31,9 @@ export default function Quiz() {
     const [answers, setAnswers] = useState(new Array(questions.length));
     const [score, setScore] = useState(0);
 
-
     useEffect(() => {
-        console.log(answers);
         generateScore();
-    }, [answers]);
+    });
 
     const handleChange = (e) => {
         setChoice(e.target.value);
@@ -81,7 +81,7 @@ export default function Quiz() {
 
     return (
         <QuizBody>
-            <Title>Sample Quiz</Title>
+            <Title>{quiz.name}</Title>
             <Box sx={{ display: 'center', paddingTop: '2%', flexWrap: 'wrap', '& > :not(style)': { m: 1, bgcolor: "#282c34", width: 800, height: 350, }, }}>
                 <Paper elevation={3}>
                     {activeStep === questions.length &&
@@ -95,7 +95,7 @@ export default function Quiz() {
                                         {score}%
                                     </Typography>
                                     <CardActions sx={{justifyContent: 'center', mt: 2}}>
-                                        <Button variant="outlined" size="small">Mint</Button>
+                                        <QuizMint account={props.account} provider={props.provider} score={score} quiz={quiz.name} />
                                     </CardActions>
                                 </CardContent>
                             </Card>
