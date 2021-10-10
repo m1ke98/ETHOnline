@@ -5,7 +5,7 @@
   <h3 align="center">Proof of Experience
 </h3>
   <p align="center">
- Tokenized learning backed by the power of the Ethereum Blockchain. 
+ Tokenized learning powered by the Ethereum Blockchain. 
   <br/>
   </p>
   
@@ -13,9 +13,9 @@
 ## About
 What is PoE?
 
-PoE or _Proof of Experience_, allows for authentication and verification of real world experience.
-PoE mints non-transferable NFT's and binds them to digital or physical credential certificates. 
-These certificates can be awared to an end user to be presented as immutable proof of a completed experience. 
+PoE or _Proof of Experience_, allows for authentication and verification of real world experiences.
+PoE mints NFT's and binds them to digital or physical certificates. 
+These certificates can be awared to an end user to be presented as immutable proof of a completed experience.
 
   
 ## Installation Guide
