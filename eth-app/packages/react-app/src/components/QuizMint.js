@@ -8,10 +8,11 @@ import { SpecialLink, QuizImage } from './styling';
 
 import logo from "../assets/poe.png";
 
-// import { storeNftData } from './helpers/storage';
+import { storeQuizData } from './helpers/quizStorage';
 
 const QuizMint = (props) => {
 
+    const imageId = '0';
     const account = props.account;
     const provider = props.provider;
     const score = props.score;
@@ -19,18 +20,23 @@ const QuizMint = (props) => {
     const [status, setStatus] = useState("");
     const [successful, setSuccess] = useState(false);
     const [open, setOpen] = useState(false);
+    const [tokenURI, setTokenURI] = useState("");
     
     const handleOpen = () => setOpen(true);
-    
     const handleClose = () => setOpen(false);
 
     const onMintPressed = async () => {
-        const { success, status } = await mintToken(account, provider);
-        setStatus(status);
-        if (success) {
-            setSuccess(true);
-        } else {
-            setSuccess(false);
+        const metadata = await storeQuizData(quiz, account, score, imageId);
+        if (metadata) {
+            setTokenURI(metadata.url);
+            console.log(tokenURI);
+            const { success, status } = await mintToken(account, provider, tokenURI);
+            setStatus(status);
+            if (success) {
+                setSuccess(true);
+            } else {
+                setSuccess(false);
+            }
         }
         handleOpen();
     };
