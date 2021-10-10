@@ -29,8 +29,6 @@ export default function Quiz() {
     const [answers, setAnswers] = useState(new Array(questions.length));
     const [score, setScore] = useState(0);
 
-    // UseMemo(); to fix the answer update status.
-
     useEffect(() => {
         generateScore();
     });
