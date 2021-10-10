@@ -1,28 +1,39 @@
-import { MintBody, Title } from "./styling";
+import {Title, Body} from "./styling";
 import image2 from "../assets/image2.png";
-import ProfileCard from "./styling/ProfileCard";
+import ProfileCard from "./ProfileCard";
+import SignInPrompt from "./SignInPrompt";
 
-export default function Profile() {
+export default function Profile({
+    provider,
+    web3Modal,
+    account,
+    txHistory
+}) {
+    const profileCards = {};
 
-    return (
-        <div>
-            <Title>Profile</Title>
-            <MintBody>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm">
-                            <ProfileCard cardImage={image2} imageTitle={"Test Image Title"}></ProfileCard>
-                        </div>
-                        <div className="col-sm">
-                            <ProfileCard cardImage={image2} imageTitle={"Test Image Title"}></ProfileCard>
+    if (provider) {
+        return (
+            <div>
+                <Title>Profile</Title>
+                <Body>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm">
+                                <ProfileCard cardImage={image2} imageTitle={"Test Image Title"}></ProfileCard>
+                            </div>
+                            <div className="col-sm">
+                                <ProfileCard cardImage={image2} imageTitle={"Test Image Title"}></ProfileCard>
 
-                        </div>
-                        <div className="col-sm">
-                            <ProfileCard cardImage={image2} imageTitle={"Test Image Title"}></ProfileCard>
+                            </div>
+                            <div className="col-sm">
+                                <ProfileCard cardImage={image2} imageTitle={"Test Image Title"}></ProfileCard>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </MintBody>
-        </div>
-    )
+                </Body>
+            </div>
+        )
+    }
+
+    return (<SignInPrompt web3Modal={web3Modal} />);
 }

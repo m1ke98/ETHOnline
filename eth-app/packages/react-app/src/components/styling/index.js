@@ -1,5 +1,19 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {Button as BaseButton} from "@mui/material";
+
+
+
+export const SignInButton = styled(BaseButton)`
+  background-color: blue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0px 20px;
+  padding: 12px 24px;`;
 
 export const Header = styled.header`
   background-color: #282c34;
