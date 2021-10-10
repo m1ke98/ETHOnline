@@ -1,6 +1,8 @@
 import React from "react";
 import { StyledLink, Button } from "./styling";
 import logo from "../assets/New Poe 6.png";
+import { Tooltip } from "@mui/material";
+
 
 export default function Navbar({
   web3Modal,
@@ -28,7 +30,9 @@ export default function Navbar({
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <div className="button">
-                <Button onClick={web3Modal}>{(rendered && rendered !== "") ? rendered : "Connect Wallet"}</Button>
+                <Tooltip title={(rendered && rendered !== "") ? "Disconnect Wallet" : "Connect Wallet"}>
+                  <Button onClick={web3Modal}>{(rendered && rendered !== "") ? rendered : "Connect Wallet"}</Button>
+                </Tooltip>
               </div>
             </li>
           </ul>

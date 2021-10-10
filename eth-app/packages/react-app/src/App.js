@@ -52,9 +52,6 @@ function App() {
         // Load the user's accounts.
         const accounts = await provider.listAccounts();
         setAccount(accounts[0]);
-        // Load accounts history of transactions with our contract   
-        const result = await getTxHistoryByAddress(account, addresses.poeNft);
-        setTxHistory(result.txHistory);
 
         try {
           // Resolve the ENS name for the first account.
@@ -81,6 +78,24 @@ function App() {
     fetchAccount();
   }, [provider, account, setAccount, setRendered]);
 
+  
+  useEffect(() => {
+    async function fetchTransactions() {
+      if (!provider) {
+        return;
+      }
+
+      const networkInfo = await provider.getNetwork();
+      if (networkInfo && networkInfo.chainId === 3) { //Only setup for Ropsten right now
+        console.log(networkInfo.chainId);
+        // Load accounts history of transactions with our contract   
+        const result = await getTxHistoryByAddress(account, addresses.poeNft);
+        setTxHistory(result.txHistory);
+      }
+    }
+    fetchTransactions();
+  }, [account, provider]);
+
   // const { loading, error, data } = useQuery(GET_TRANSFERS); // For use with GraphQL
   // For GraphQl
   // React.useEffect(() => {
@@ -94,12 +109,7 @@ function App() {
       /* catch prevents errors when user closes wallet modal*/
       loadWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
     } else {
-      let response = window.confirm("Are you sure you want to sign out?");
-      if (response) {
         logoutOfWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
-      } else {
-        return;
-      }
     }
   }
 
@@ -118,7 +128,7 @@ function App() {
             <Mint web3Modal={web3Modal} provider={provider} account={account} />
           </Route>
           <Route path="/test">
-            <Test account={account} provider={provider} txHistory={txHistory} />
+            <Test account={account} provider={provider} />
           </Route>
           <Route path="/quiz">
             <Quiz account={account} provider={provider} />
