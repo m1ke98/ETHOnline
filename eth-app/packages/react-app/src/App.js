@@ -13,7 +13,6 @@ import Mint from "./components/Mint.js";
 // import Test from "./components/Test.js";
 import Quiz from "./components/Quiz.js";
 
-
 function App() {
 
   const [account, setAccount] = useState("");
@@ -76,13 +75,6 @@ function App() {
     fetchTransactions();
   }, [account, provider]);
 
-  // const { loading, error, data } = useQuery(GET_TRANSFERS); // For use with GraphQL
-  // For GraphQl
-  // React.useEffect(() => {
-  //   if (!loading && !error && data && data.transfers) {
-  //     console.log({ transfers: data.transfers });
-  //   }
-  // }, [loading, error, data]);
 
   function web3Modal() {
     if (!provider) {
@@ -107,9 +99,9 @@ function App() {
           <Route path="/mint">
             <Mint web3Modal={web3Modal} provider={provider} account={account} />
           </Route>
-          {/* <Route path="/test"> */}
-            {/* <Test account={account} provider={provider} /> */}
-          {/* </Route> */}
+          {/* <Route path="/test">
+            <Test account={account} provider={provider} />
+          </Route> */}
           <Route path="/quiz">
             <Quiz account={account} provider={provider} />
           </Route>
