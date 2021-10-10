@@ -1,16 +1,13 @@
-import { MintBody, Title, Body } from "./styling";
+import {Title, Body} from "./styling";
 import image2 from "../assets/image2.png";
 import ProfileCard from "./ProfileCard";
-import { SignInButton } from "./styling/index";
-import { Typography } from "@mui/material";
-import metamaskTransparent from "../assets/metamaskTransparent.png";
-import wcIcon from "../assets/wconnet.svg";
 import SignInPrompt from "./SignInPrompt";
 
 export default function Profile({
     provider,
     web3Modal,
-    account
+    account,
+    txHistory
 }) {
     const profileCards = {};
 
@@ -18,7 +15,7 @@ export default function Profile({
         return (
             <div>
                 <Title>Profile</Title>
-                <MintBody>
+                <Body>
                     <div className="container">
                         <div className="row">
                             <div className="col-sm">
@@ -33,7 +30,7 @@ export default function Profile({
                             </div>
                         </div>
                     </div>
-                </MintBody>
+                </Body>
             </div>
         )
     }

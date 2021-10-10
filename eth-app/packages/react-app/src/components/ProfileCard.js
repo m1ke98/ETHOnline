@@ -1,24 +1,28 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
 
-export default function ProfileCard({ cardImage,imageTitle }) {
+export default function ProfileCard({ mainImage, title, textContent }) {
 
     return (
         <div>
             <Card className="card">
                 <CardMedia
-                    image={cardImage}
-                    style={{ height: '150' + 'px' }}
-                    title={imageTitle}
+                    component="img"
+                    height="140"
+                    image={mainImage}
+                    alt="card-main-image"
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        CardMedia Example
+                    <Typography gutterBottom variant="h5" component="div">
+                        {title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        The CardMedia component sets a background image to cover available
-                        space.
+                    <Typography variant="body2" color="text.secondary">
+                        {textContent}
                     </Typography>
                 </CardContent>
+                <CardActions>
+                    <Button size="small">Share</Button>
+                    <Button size="small">Learn More</Button>
+                </CardActions>
             </Card>
         </div>
     );

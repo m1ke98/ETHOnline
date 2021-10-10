@@ -15,7 +15,7 @@ export default function SignInPrompt({
                 {/* <img src={wcIcon} alt="wallent-connect" height="200" style={{ padding: 1 + 'rem' }} /> */}
             </div>
             <SignInButton onClick={web3Modal} variant="contained" style={{ marginTop: 2 + 'rem' }}>{"Connect Wallet"}</SignInButton>
-            <Typography sx={{ marginTop: 2 }}>Please Connect Wallet to see your Profile</Typography>
+            <Typography sx={{ marginTop: 2 }}>Please 'Connect Wallet' create proovable experience</Typography>
         </Body>
     </div >);
 }
