@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useWeb3Modal from "./hooks/useWeb3Modal";
-
 // import { useQuery } from "@apollo/react-hooks";
 //import { Contract } from "@ethersproject/contracts";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { getTxHistoryByAddress } from "./components/helpers/http-client";
+import { addresses } from "@project/contracts";
 
 
 //import { getDefaultProvider } from "@ethersproject/providers";
-//import React, { useEffect, useState } from "react";
 
 // For readOnChainData() function
 //import { addresses, abis } from "@project/contracts";
@@ -38,7 +38,9 @@ function App() {
 
   const [account, setAccount] = useState("");
   const [rendered, setRendered] = useState("");
+  const [txHistory, setTxHistory] = useState(null);
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
+
 
   useEffect(() => {
     async function fetchAccount() {
@@ -50,6 +52,9 @@ function App() {
         // Load the user's accounts.
         const accounts = await provider.listAccounts();
         setAccount(accounts[0]);
+        // Load accounts history of transactions with our contract   
+        const result = await getTxHistoryByAddress(account, addresses.poeNft);
+        setTxHistory(result.txHistory);
 
         try {
           // Resolve the ENS name for the first account.
@@ -64,17 +69,8 @@ function App() {
         } catch (err) {
           setRendered(account.substring(0, 6) + "..." + account.substring(36));
         }
-        /*
-        // Resolve the ENS name for the first account.
-        const name = await provider.lookupAddress(accounts[0]);
 
-        // Render either the ENS name or the shortened account address.
-        if (name) {
-          setRendered(name);
-        } else {
-          setRendered(account.substring(0, 6) + "..." + account.substring(36));
-        }
-        */
+
       } catch (err) {
         setAccount("");
         setRendered("");
@@ -84,7 +80,6 @@ function App() {
     }
     fetchAccount();
   }, [provider, account, setAccount, setRendered]);
-
 
   // const { loading, error, data } = useQuery(GET_TRANSFERS); // For use with GraphQL
   // For GraphQl
@@ -117,13 +112,13 @@ function App() {
             <Home />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile web3Modal={web3Modal} provider={provider} account={account} txHistory={txHistory} />
           </Route>
           <Route path="/mint">
-            <Mint web3Modal={web3Modal} provider={provider} account={account}/>
+            <Mint web3Modal={web3Modal} provider={provider} account={account} />
           </Route>
           <Route path="/test">
-            <Test account={account} provider={provider} />
+            <Test account={account} provider={provider} txHistory={txHistory} />
           </Route>
           <Route path="/quiz">
             <Quiz />
