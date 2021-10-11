@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import useWeb3Modal from "./hooks/useWeb3Modal";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { getTxHistoryByAddress } from "./components/helpers/http-client";
 import { addresses } from "@project/contracts";
 
-
-
 import Home from "./components/Home.js";
 import Navbar from "./components/Navbar.js";
 import Profile from "./components/Profile.js";
 import Mint from "./components/Mint.js";
-// import Test from "./components/Test.js";
+import Test from "./components/Test.js";
 import Quiz from "./components/Quiz.js";
 
 function App() {
@@ -19,6 +17,7 @@ function App() {
   const [rendered, setRendered] = useState("");
   const [txHistory, setTxHistory] = useState(null);
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
+  const [network, setNetwork] = useState(undefined);
 
 
   useEffect(() => {
@@ -57,23 +56,53 @@ function App() {
     fetchAccount();
   }, [provider, account, setAccount, setRendered]);
 
-  
+
+
+
   useEffect(() => {
-    async function fetchTransactions() {
-      if (!provider) {
+    async function checkNetwork() {
+      try {
+        if (!provider) {
+          return;
+        }
+
+        const networkInfo = await provider.getNetwork();
+        if (networkInfo) {
+          switch (networkInfo.chainId) {
+            case 1:
+              setNetwork('mainnet');
+              break;
+            case 3:
+              setNetwork('ropsten');
+              break;
+            default:
+              setNetwork('localhost');
+          }
+        }
+
+      } catch (err) {
+        console.error(err);
         return;
       }
+    }
+    checkNetwork();
+  }, [provider]);
 
-      const networkInfo = await provider.getNetwork();
-      if (networkInfo && networkInfo.chainId === 3) { //Only setup for Ropsten right now
-        console.log(networkInfo.chainId);
-        // Load accounts history of transactions with our contract   
-        const result = await getTxHistoryByAddress(account, addresses.poeNft);
+  useEffect(() => {
+    async function fetchTransactions() {
+      if (!provider || !network) {
+        return;
+      }
+      console.log('Wallet is connected to: ' + network);
+      // Load accounts history of transactions with our contract   
+      if (network && network !== 'localhost') {
+        const result = await getTxHistoryByAddress(account, addresses[network].poeNft);
+        console.log(result);
         setTxHistory(result.txHistory);
       }
     }
     fetchTransactions();
-  }, [account, provider]);
+  }, [account, provider, network]);
 
 
   function web3Modal() {
@@ -81,7 +110,7 @@ function App() {
       /* catch prevents errors when user closes wallet modal*/
       loadWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
     } else {
-        logoutOfWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
+      logoutOfWeb3Modal().then(() => { }).catch((err) => { console.log(err) });
     }
   }
 
@@ -99,9 +128,9 @@ function App() {
           <Route path="/mint">
             <Mint web3Modal={web3Modal} provider={provider} account={account} />
           </Route>
-          {/* <Route path="/test">
-            <Test account={account} provider={provider} />
-          </Route> */}
+          <Route path="/test">
+            <Test account={account} provider={provider} test={txHistory} />
+          </Route>
           <Route path="/quiz">
             <Quiz account={account} provider={provider} />
           </Route>
