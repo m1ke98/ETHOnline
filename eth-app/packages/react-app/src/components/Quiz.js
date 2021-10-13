@@ -21,6 +21,8 @@ import Typography from '@mui/material/Typography';
 import { quiz, questions, quizAnswers } from "./helpers/quizInfo.js";
 
 import QuizMint from "../components/QuizMint.js";
+import SignInPrompt from "./SignInPrompt";
+
 
 export default function Quiz(props) {
 
@@ -78,7 +80,7 @@ export default function Quiz(props) {
         var percentage = ((100 * pts/posPts)).toFixed(0);
         setScore(percentage);
     };
-
+    if (props.provider) {
     return (
         <QuizBody>
             <Title>{quiz.name}</Title>
@@ -150,4 +152,7 @@ export default function Quiz(props) {
             </Box>
         </QuizBody>
     )
+ }
+ return (<SignInPrompt web3Modal={props.web3Modal} />);
+
 }

@@ -33,7 +33,7 @@ export const getTxHistoryByAddress = async (userAddress, contractAddress) => {
     EXAMPLE RESPONSE:
    "status":"1",
    "message":"OK",
-   "result":[
+   "result":[ // Result is array of transaction objects
       {
          "blockNumber":"4708120",
          "timeStamp":"1512907118",
@@ -43,7 +43,7 @@ export const getTxHistoryByAddress = async (userAddress, contractAddress) => {
          "from":"0xb1690c08e213a35ed9bab7b318de14420fb57d8c",
          "contractAddress":"0x06012c8cf97bead5deae237070f9587f8e7a266d",
          "to":"0x6975be450864c02b4613023c2152ee0743572325",
-         "tokenID":"202106", <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+         "tokenID":"202106", // Token ID!
          "tokenName":"CryptoKitties",
          "tokenSymbol":"CK",
          "tokenDecimal":"0",
