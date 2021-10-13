@@ -3,7 +3,7 @@ import { Body, Title, Button } from "./styling";
 import { getTokenUri } from "./helpers/interact.js";
 
 const Test = (props) => {
-
+    const testData = props.test;
     const account = props.account;
     const provider = props.provider;
     const [status, setStatus] = useState("");
@@ -24,7 +24,7 @@ const Test = (props) => {
             <Title>Test</Title>
             <Body>
                 <Button onClick={onTokenData}>Get Data</Button>
-                <br/>
+                <br />
                 <p id="account">
                     Current Address: {account}
                 </p>
@@ -33,6 +33,11 @@ const Test = (props) => {
                 </p>
                 <p id="status">
                     {status}
+                </p>
+                <p id="testData">
+                    <div className="container-fluid">
+                        Transaction History:   {testData ? testData : 'No Transaction Data Available'}
+                    </div>
                 </p>
             </Body>
         </div>

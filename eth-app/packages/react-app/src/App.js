@@ -103,7 +103,7 @@ function App() {
             <Test account={account} provider={provider} />
           </Route> */}
           <Route path="/quiz">
-            <Quiz account={account} provider={provider} />
+            <Quiz account={account} provider={provider} web3Modal={web3Modal} />
           </Route>
         </Switch>
       </div>
